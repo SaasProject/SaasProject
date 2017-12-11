@@ -66,7 +66,11 @@ function create(userParam) {
                 // username already exists
                 deferred.reject('Username "' + userParam.username + '" is already taken');
             } else {
-                createUser();
+                if(userParam.password != userParam.confirmPassword){
+                    deferred.reject("Password doesn't match");
+                }else{
+                    createUser();
+                }
             }
         });
  
