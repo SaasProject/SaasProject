@@ -34,10 +34,12 @@
             }
             else{
                 //perform notification here
+                FlashService.Error("No assets found");
                 console.log('No assets found');
             }
         }, function(){
             //perform notification here
+            FlashService.Error("No assets found");
             console.log('error');
         });
 

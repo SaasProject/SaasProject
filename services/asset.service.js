@@ -13,7 +13,7 @@ function getAll(){
     var deferred = Q.defer();
 
     Asset.find({}, {_id: false}, function(err, assets){
-        console.log('assets.service');
+        //console.log('assets.service');
         //standard error
         if(err) deferred.reject(err);
 

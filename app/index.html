@@ -26,13 +26,14 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/login"><span class="glyphicon glyphicon-log-out" ng-click="logout()"></span> Logout</a></li>
                 </ul>
-                <div class="flash-message" ng-if="flash">
-                    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
-                </div>
             </div>
         </nav>
     </header>
 
+    <!-- flash message div -->
+    <div class="flash-message" ng-if="flash">
+        <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+    </div>
  
     <!-- main -->
     <main ui-view></main>

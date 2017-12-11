@@ -8,7 +8,7 @@ module.exports = router;
 
 function getAllAssets(req, res){
     assetService.getAll().then(function(assets){
-        console.log('assets.controller');
+        //console.log('assets.controller');
         //console.log(assets);
         if(assets){
             res.send(assets);
