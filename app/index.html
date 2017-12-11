@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>MEAN Stack User Registration and Login Example Application</title>
+    <title>SaaS Project</title>
  
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
     <link href="app-content/app.css" rel="stylesheet" />
@@ -19,6 +19,9 @@
                     <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home"><span class="glyphicon glyphicon-home"> Home</a></li>
                     <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account"><span class="glyphicon glyphicon-user"> Account</a></li>
                     <li ng-class="{active: activeTab === 'details'}"><a ui-sref="details"><span class="glyphicon glyphicon-list-alt"> Details</a></li>
+                        
+                    <!--added by jeremy -->
+                    <li ng-class="{active: activeTab === 'report'}"><a ui-sref="report"><span class="glyphicon glyphicon-list-alt"> Report</a></li>                            
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/login"><span class="glyphicon glyphicon-log-out" ng-click="logout()"></span> Logout</a></li>
@@ -39,8 +42,13 @@
  
     <!-- external scripts -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+
+    <!-- added by jeremy to implement ng-csv (angular included above) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-sanitize.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-csv/0.3.6/ng-csv.min.js"></script>    
+    
  
     <!-- application scripts -->
     <script src="app.js"></script>
@@ -49,5 +57,10 @@
     <script src="home/index.controller.js"></script>
     <script src="account/index.controller.js"></script>
     <script src="details/index.controller.js"></script>
+
+    <!-- added by jeremy -->
+    <script src="app-services/asset.service.js"></script>    
+    <script src="report/index.controller.js"></script>
+    
 </body>
 </html>

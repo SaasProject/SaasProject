@@ -2,7 +2,7 @@
     'use strict';
  
     angular
-        .module('app', ['ui.router'])
+        .module('app', ['ui.router', 'ngSanitize', 'ngCsv'])
         .config(config)
         .run(run);
  
@@ -31,6 +31,15 @@
                 controller: 'Details.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'details' }
+            })
+            //added by jeremy
+            .state('report', {
+                url: '/report',
+                templateUrl: 'report/index.html',
+                controller: 'Report.IndexController',
+                //not yet used
+                controllerAs: 'vm',
+                data: {activeTab: 'report'}
             });
     }
  

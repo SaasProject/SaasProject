@@ -5,6 +5,11 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.json');
+
+//added by jeremy
+require('./models/models');
+var mongoose = require('mongoose');
+mongoose.connect(config.connectionString);
  
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -20,6 +25,10 @@ app.use('/login', require('./controllers/login.controller'));
 app.use('/register', require('./controllers/register.controller'));
 app.use('/app', require('./controllers/app.controller'));
 app.use('/api/users', require('./controllers/api/users.controller'));
+
+//added by jeremy
+app.use('/api/assets', require('./controllers/api/assets.controller'));
+
  
 // make '/app' default route
 app.get('/', function (req, res) {
