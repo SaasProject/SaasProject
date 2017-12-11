@@ -67,6 +67,7 @@ function create(userParam) {
                 deferred.reject('Username "' + userParam.username + '" is already taken');
             } else {
                 if(userParam.password != userParam.confirmPassword){
+                    //if password and confirm password didnt match
                     deferred.reject("Password doesn't match");
                 }else{
                     createUser();
@@ -80,9 +81,17 @@ function create(userParam) {
  
         // add hashed password to user object
         user.hash = bcrypt.hashSync(userParam.password, 10);
+        var set = {
+            role:userParam.role,
+            firstName: userParam.firstName,
+            lastName: userParam.lastName,
+            username: userParam.username,
+            comment: userParam.comment,
+            hash: user.hash,
+        };
  
         db.users.insert(
-            user,
+            set,
             function (err, doc) {
                 if (err) deferred.reject(err);
  
