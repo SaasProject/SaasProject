@@ -25,13 +25,6 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'account' }
             })
-            .state('details', {
-                url: '/details',
-                templateUrl: 'details/index.html',
-                controller: 'Details.IndexController',
-                controllerAs: 'vm',
-                data: { activeTab: 'details' }
-            })
             //added by jeremy
             .state('report', {
                 url: '/report',
