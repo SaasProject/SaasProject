@@ -5,6 +5,7 @@ var userService = require('services/user.service');
  
 // routes
 router.post('/authenticate', authenticateUser);
+router.post('/emailOn', emailOn);       // added by dyan0
 router.post('/register', registerUser);
 router.get('/current', getCurrentUser);
 router.put('/:_id', updateUser);
@@ -28,6 +29,20 @@ function authenticateUser(req, res) {
         });
 }
  
+// added by dyan0
+function emailOn(req, res) {
+    console.log(req.body);
+    userService.emailOn(req.body)
+        .then(function (emailDBstat) {
+            console.log(req.body.email);
+            res.status(200).send(emailDBstat);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+}
+// end of add - dyan0
+
 function registerUser(req, res) {
     userService.create(req.body)
         .then(function () {
