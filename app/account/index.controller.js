@@ -22,13 +22,18 @@
         }
  
         function saveUser() {
-            UserService.Update(vm.user)
-                .then(function () {
-                    FlashService.Success('User updated');
-                })
-                .catch(function (error) {
-                    FlashService.Error(error);
-                });
+
+            if(vm.user.password != vm.user.confirmPassword){
+                FlashService.Error("Password doesn't match");
+            }else{
+                UserService.Update(vm.user)
+                    .then(function () {
+                        FlashService.Success('User updated');
+                    })
+                    .catch(function (error) {
+                        FlashService.Error(error);
+                    });
+            }
         }
  
         function deleteUser() {
