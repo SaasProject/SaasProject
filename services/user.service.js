@@ -8,7 +8,10 @@ var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('users');
  
 var service = {};
- 
+
+//Added by Glenn
+service.getAll = getAll;
+
 service.authenticate = authenticate;
 service.emailOn = emailOn;      // added by dyan0
 service.getById = getById;
@@ -89,6 +92,27 @@ function getById(_id) {
  
     return deferred.promise;
 }
+
+//Glenn added this
+function getAll() {
+    var deferred = Q.defer();
+ 
+    //db.users.find({role:  {$ne : "Admin"}}).toArray(function(err, user) {
+    db.users.find({}).toArray(function(err, user) {
+        if (err) deferred.reject(err);
+ 
+        if (user) {
+            // return user (without hashed password)
+            deferred.resolve(_.omit(user, 'hash'));
+        } else {
+            // user not found
+            deferred.resolve();
+        }
+    });
+    
+    return deferred.promise;
+}
+//
  
 function create(userParam) {
     var deferred = Q.defer();

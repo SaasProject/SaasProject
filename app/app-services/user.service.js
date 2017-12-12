@@ -9,6 +9,7 @@
         var service = {};
  
         service.GetCurrent = GetCurrent;
+        service.GetAdmin = GetAdmin;
         service.GetAll = GetAll;
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
@@ -21,9 +22,15 @@
         function GetCurrent() {
             return $http.get('/api/users/current').then(handleSuccess, handleError);
         }
- 
+
+        // Added by glenn
+        function GetAdmin() {
+            return $http.get('/api/users/isAdmin').then(handleSuccess, handleError);
+        }
+        
+        // Added by glenn
         function GetAll() {
-            return $http.get('/api/users').then(handleSuccess, handleError);
+            return $http.get('/api/users/all').then(handleSuccess, handleError);
         }
  
         function GetById(_id) {

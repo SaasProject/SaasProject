@@ -20,7 +20,8 @@
                     <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account"><span class="glyphicon glyphicon-user"> Account</a></li>
                         
                     <!--added by jeremy -->
-                    <li ng-class="{active: activeTab === 'report'}"><a ui-sref="report"><span class="glyphicon glyphicon-list-alt"> Report</a></li>                            
+                    <li ng-class="{active: activeTab === 'report'}"><a ui-sref="report"><span class="glyphicon glyphicon-list-alt"> Report</a></li>  
+					<li ng-class="{active: activeTab === 'manageUsers'}" ng-show="isAdmin"><a ui-sref="manageUsers"><span class="glyphicon glyphicon-tasks"> Manage Accounts</a></li>                          
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/login"><span class="glyphicon glyphicon-log-out" ng-click="logout()"></span> Logout</a></li>
@@ -57,6 +58,9 @@
     <script src="home/index.controller.js"></script>
     <script src="account/index.controller.js"></script>
     <script src="details/index.controller.js"></script>
+	
+	<!-- added by glenn -->
+	<script src="manageUsers/index.controller.js"></script>
 
     <!-- added by jeremy -->
     <script src="app-services/asset.service.js"></script>    

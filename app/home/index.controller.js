@@ -15,6 +15,7 @@
         function initController() {
             // get current user
             UserService.GetCurrent().then(function (user) {
+                console.log(user);
                 vm.user = user;
             });
         }
