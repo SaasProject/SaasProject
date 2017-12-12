@@ -16,6 +16,7 @@ service.authenticate = authenticate;
 service.emailOn = emailOn;      // added by dyan0
 service.getById = getById;
 service.create = create;
+service.insert = insert;    // macku
 service.update = update;
 service.delete = _delete;
  
@@ -29,7 +30,7 @@ function authenticate(username, password) {
  
         if (user && bcrypt.compareSync(password, user.hash)) {
             // authentication successful
-            deferred.resolve(jwt.sign({ sub: user._id }, config.secret));
+            deferred.resolve(jwt.sign({ sub: user._id }, config.secret ,{expiresIn:'9h'}));
         } else {
             // authentication failed
             deferred.resolve();
@@ -113,6 +114,45 @@ function getAll() {
     return deferred.promise;
 }
 //
+function insert(userParam){
+    var deferred = Q.defer();
+    db.users.findOne(
+        { username: userParam.username },
+        function (err, user) {
+            if (err) deferred.reject(err);
+ 
+            if (user) {
+                // username already exists
+                deferred.reject('Username "' + userParam.username + '" is already taken');
+            } else {
+                insertUser();
+            }
+        });
+    function insertUser() {
+        // set user object to userParam without the cleartext password
+        //var user = _.omit(userParam, 'password');
+ 
+        // add hashed password to user object
+        //user.hash = bcrypt.hashSync(userParam.password, 10);
+        var set = {
+            role:userParam.role,
+            firstName: userParam.firstName,
+            lastName: userParam.lastName,
+            username: userParam.username,
+            email: userParam.email,
+        };
+ 
+        db.users.insert(
+            set,
+            function (err, doc) {
+                if (err) deferred.reject(err);
+ 
+                deferred.resolve();
+            });
+    }
+ 
+    return deferred.promise;
+}
  
 function create(userParam) {
     var deferred = Q.defer();

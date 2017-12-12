@@ -8,6 +8,7 @@ router.get('/isAdmin', getAdminUser);
 router.get('/all', getAllUsers);
 router.post('/authenticate', authenticateUser);
 router.post('/emailOn', emailOn);       // added by dyan0
+router.post('/addUser', addUser);
 router.post('/register', registerUser);
 router.get('/current', getCurrentUser);
 router.put('/:_id', updateUser);
@@ -59,6 +60,17 @@ function emailOn(req, res) {
         });
 }
 // end of add - dyan0
+
+
+function addUser(req, res) {
+    userService.insert(req.body)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+}
 
 function registerUser(req, res) {
     userService.create(req.body)

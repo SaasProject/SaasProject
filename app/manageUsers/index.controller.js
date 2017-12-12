@@ -5,18 +5,18 @@
         .module('app')
         .controller('ManageUsers.IndexController', Controller);
  
-    function Controller(UserService, $scope) {
+    function Controller(UserService, $scope, FlashService) {
         var vm = this;
  
         vm.user = null;
 
         // Scope for users data
         $scope.aUsers = {
+            role: '',
             firstName: '',
             lastName: '',
             username: '',
-            userType: '',
-            created_at: ''
+            email: ''
         };
  
         initController();
@@ -33,6 +33,19 @@
                 vm.user = user;
             });*/
         }
+
+        // added adduser function
+        $scope.addUser = function(){
+            console.log($scope.aUsers);
+            UserService.Insert($scope.aUsers)
+                .then(function () {
+                    FlashService.Success('User updated');
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+
+        };
 
         $scope.editUser = function(index){
             console.log('index is '+index+' userid is '+$scope.allUsers[index]._id);

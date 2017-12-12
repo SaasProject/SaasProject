@@ -3,14 +3,19 @@
 
     <h3>Add User</h3>
     <p class="text-warning">{{error_message}}</p>
+    <label for="role">Role </label>
+    <select id="role" type="text" ng-model="aUsers.role" class="form-control" required>
+    	<option value="Admin">Admin</option>
+    	<option value="User">User</option>
+    </select><br>
+    <label for="firstName">First Name: </label>
+    <input id="firstName" type="text" ng-model="aUsers.firstName" class="form-control" required><br>
+    <label for="lastName">Last Name: </label>
+    <input id="lastName" type="text" ng-model="aUsers.lastName" class="form-control" required><br>
     <label for="username">Username: </label>
     <input id="username" type="text" ng-model="aUsers.username" class="form-control" required><br>
-    <label for="password">Password: </label>
-    <input id="password" type="password" class="form-control" required><br>
-    <label for="password">New Password: </label>
-    <input id="password" type="password" class="form-control"><br>
-    <label for="password">Confirm Password: </label>
-    <input id="password" type="password" class="form-control"><br>
+    <label for="email">Email: </label>
+    <input id="email" type="text" ng-model="aUsers.email" class="form-control" required><br>
 
 	<button class="btn btn-primary" ng-click="addUser()">Add User</button>
 	<button class="btn btn-warning" ng-click="updateUser()">Update</button>
