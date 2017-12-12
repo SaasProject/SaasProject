@@ -18,7 +18,7 @@
     <input id="email" type="text" ng-model="aUsers.email" class="form-control" required><br>
 
 	<button class="btn btn-primary" ng-click="addUser()">Add User</button>
-	<button class="btn btn-warning" ng-click="updateUser()">Update</button>
+	<button class="btn btn-warning" ng-click="vm.updateUser()">Update</button>
     <br/><br/>              
     <h3>List of Users</h3>
     
@@ -41,8 +41,8 @@
 				<td>{{u.lastName}}</td>
 				<td>{{u.username}}</td>
 				<td>{{u.email}}</td>
-				<td><button class="btn btn-danger" ng-click="deleteUser($index)">Remove</button></td>
-				<td><button class="btn btn-warning" ng-click="editUser($index)">Edit</button></td>
+				<td><button class="btn btn-warning" ng-click="editUser($index)">Edit</button>
+					<button class="btn btn-danger" ng-click="vm.deleteUser($index)">Delete</button></td>
 			</tr>
 		</tbody>
 	</table>
