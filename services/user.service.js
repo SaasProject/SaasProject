@@ -10,6 +10,7 @@ db.bind('users');
 var service = {};
  
 service.authenticate = authenticate;
+service.emailOn = emailOn;      // added by dyan0
 service.getById = getById;
 service.create = create;
 service.update = update;
@@ -34,7 +35,43 @@ function authenticate(username, password) {
  
     return deferred.promise;
 }
+
+// added by dyan0
+function emailOn(email) {
+    var deferred = Q.defer();
+    console.log('nasa emailOn');
+    db.users.findOne({ email: email.email }, function (err, user) {
+        if (err) deferred.reject(err);
  
+        if (user) {
+            console.log('nasa emailOn tama');
+            var liveEmail = email.tempPass;
+            // authentication successful
+
+            console.log(email.email);
+            console.log(email.tempPass);
+
+            hash = bcrypt.hashSync(email.tempPass, 10);
+
+            db.users.update({email: email.email}, 
+                {$set:{hash: hash}}, 
+                function(err, task){
+                    if (err) deferred.reject(err);
+                
+                    deferred.resolve();
+            });
+
+            deferred.resolve(liveEmail);
+        } else {
+            // authentication failed
+            deferred.resolve();
+        }
+    });
+ 
+    return deferred.promise;
+}
+// end of add - dyan0
+
 function getById(_id) {
     var deferred = Q.defer();
  
@@ -66,12 +103,7 @@ function create(userParam) {
                 // username already exists
                 deferred.reject('Username "' + userParam.username + '" is already taken');
             } else {
-                if(userParam.password != userParam.confirmPassword){
-                    //if password and confirm password didnt match
-                    deferred.reject("Password doesn't match");
-                }else{
-                    createUser();
-                }
+                createUser();
             }
         });
  
@@ -81,17 +113,9 @@ function create(userParam) {
  
         // add hashed password to user object
         user.hash = bcrypt.hashSync(userParam.password, 10);
-        var set = {
-            role:userParam.role,
-            firstName: userParam.firstName,
-            lastName: userParam.lastName,
-            username: userParam.username,
-            comment: userParam.comment,
-            hash: user.hash,
-        };
  
         db.users.insert(
-            set,
+            user,
             function (err, doc) {
                 if (err) deferred.reject(err);
  
