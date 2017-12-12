@@ -25,15 +25,22 @@
     <table class="table">
 		<thread>
 			<tr>
+				<th>Role</th>
 				<th>First Name</th>
+				<th>Last Name</th>
 				<th>Username</th>
+				<th>Email</th>
+				<th>&nbsp;</th>
 				<th>&nbsp;</th>
 			</tr>
 		</thread>
 		<tbody>
 			<tr ng-repeat="u in vm.user">
+				<td>{{u.role}}</td>
 				<td>{{u.firstName}}</td>
+				<td>{{u.lastName}}</td>
 				<td>{{u.username}}</td>
+				<td>{{u.email}}</td>
 				<td><button class="btn btn-danger" ng-click="deleteUser($index)">Remove</button></td>
 				<td><button class="btn btn-warning" ng-click="editUser($index)">Edit</button></td>
 			</tr>
