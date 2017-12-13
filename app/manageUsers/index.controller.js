@@ -37,11 +37,6 @@
 
         // added adduser function
         $scope.addUser = function(){
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for (var i = 0; i < 10; i++){
-                $scope.aUsers.password += possible.charAt(Math.floor(Math.random() * possible.length));
-            }
-            console.log($scope.aUsers.password);
             if($scope.aUsers.role.length===0 
                 || $scope.aUsers.firstName.length===0 
                 || $scope.aUsers.lastName.length===0  
@@ -49,14 +44,20 @@
                 || $scope.aUsers.email.length===0 ){
                 FlashService.Error('Please Fill up all the textfields');
             }else{
-            UserService.Insert($scope.aUsers)
-                .then(function () {
-                    FlashService.Success('User updated');
-                })
-                .catch(function (error) {
-                    FlashService.Error(error);
-                });
-            }
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                for (var i = 0; i < 10; i++){
+                    $scope.aUsers.password += possible.charAt(Math.floor(Math.random() * possible.length));
+                }
+                console.log($scope.aUsers.password);
+
+                UserService.Insert($scope.aUsers)
+                    .then(function () {
+                        FlashService.Success('User updated');
+                    })
+                    .catch(function (error) {
+                        FlashService.Error(error);
+                    });
+                }
         };
 
         $scope.clearField = function(){
