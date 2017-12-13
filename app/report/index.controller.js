@@ -39,7 +39,7 @@
             }
         }, function(){
             //perform notification here
-            FlashService.Error("No assets found");
+            FlashService.Error("An error occurred");
             console.log('error');
         });
 

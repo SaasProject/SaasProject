@@ -24,7 +24,7 @@ function getAll(){
         }
         //empty collection
         else{
-            deferred.resolve();
+            deferred.resolve([]);
         }
     });
 

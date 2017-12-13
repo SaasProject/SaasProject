@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 //schema if asset.warehouse has no reference
 var assetSchema = new mongoose.Schema({
-    asset_id: {type: String, index: {unique: true}},
+    asset_id: {type: String, required: true, index: {unique: true}},
     name: {type: String, required: true},
     warehouse: {type: String, required: true},
     status: {type: String, required: true},
