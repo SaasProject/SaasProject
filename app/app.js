@@ -6,7 +6,7 @@
         .config(config)
         .run(run);
  
-    function config($stateProvider, $urlRouterProvider) {
+    function config($stateProvider, $urlRouterProvider, $httpProvider) {
         // default route
         $urlRouterProvider.otherwise("/");
  
@@ -44,6 +44,28 @@
                 controllerAs: 'vm',
                 data: {activeTab: 'report'}
             });
+
+
+        // added by jeremy
+        // this is to intercept all errors. when 401 is received, must redirect to login
+        $httpProvider.interceptors.push(function($q, $window){
+            return {
+                'responseError': function(rejection){
+                    var defer = $q.defer();
+
+                    //401 is unauthorized error, meaning token has expired 
+                    if(rejection.status == 401){
+                        console.log('ERROR CAUGHT!');
+                        alert('Your session has expired. Click Ok to login again');
+                        $window.location.href = "/login";
+                    }
+
+                    defer.reject(rejection);
+
+                    return defer.promise;
+                }
+            };
+        });
     }
  
     function run($http, $rootScope, $window) {
