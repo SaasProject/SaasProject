@@ -23,12 +23,10 @@
  
         function saveUser() {
             if(vm.user.password===undefined){
-                console.log(vm.user.password);
                 FlashService.Error("Enter New Password");
             }else{
                 if(vm.user.password != vm.user.confirmPassword){
-                    console.log('wew');
-                    console.log(vm.user.password);
+                    
                     FlashService.Error("Password doesn't match");
                 }else{
                     UserService.Update(vm.user)

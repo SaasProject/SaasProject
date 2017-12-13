@@ -27,19 +27,16 @@
         function initController() {
             // get current user
             UserService.GetAll().then(function (user) {
-                console.log(user);
                 vm.user = user;
                 $scope.allUsers = user;
             });
             /*UserService.GetCurrent().then(function (user) {
-                console.log(user)
                 vm.user = user;
             });*/
         }
 
         // added adduser function
         $scope.addUser = function(){
-            console.log($scope.aUsers);
             var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             for (var i = 0; i < 10; i++){
                 $scope.aUsers.password += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -50,7 +47,6 @@
                 || $scope.aUsers.lastName.length===0  
                 || $scope.aUsers.username.length===0  
                 || $scope.aUsers.email.length===0 ){
-                console.log("wew");
                 FlashService.Error('Please Fill up all the textfields');
             }else{
             UserService.Insert($scope.aUsers)
@@ -74,7 +70,6 @@
         }
 
         $scope.editUser = function(index){
-            console.log('index is '+index+' userid is '+$scope.allUsers[index]._id);
             $scope.aUsers = $scope.allUsers[index];
         };
 		
@@ -86,7 +81,6 @@
                 || $scope.aUsers.lastName.length===0  
                 || $scope.aUsers.username.length===0  
                 || $scope.aUsers.email.length===0 ){
-					console.log("wew");
 					FlashService.Error('Please Fill up all the textfields');
 				} else {
 			
@@ -110,13 +104,8 @@
 		//deleteUser function
 		vm.deleteUser = function(index) {
 			
-			console.log(index);
-			
 			var toDel = vm.user[index];
-			console.log(toDel._id);
-			console.log(toDel.username);
-			
-			
+
             if (confirm("Are you sure to delete this user?")){
 				
              UserService.Delete(toDel._id)
@@ -137,10 +126,10 @@
 
 /*
 userService.query({usertype: 'user'}).$promise.then(function(results){ 
-       console.log("nonAdmin users are: ", results);
+       
        $scope.nonAdminUsers = results;
     }, function(error) {
-      // console.log(error);
+      
        $scope.nonAdminUsers = [];
     });
 */

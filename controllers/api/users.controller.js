@@ -17,7 +17,6 @@ router.delete('/:_id', deleteUser);
 module.exports = router;
 
 function getAllUsers(req, res) {
-    console.log(req.user.sub);
     userService.getAll(req.user.sub)
         .then(function (user) {
             if (user) {
@@ -86,7 +85,6 @@ function getCurrentUser(req, res) {
     userService.getById(req.user.sub)
         .then(function (user) {
             if (user) {
-                console.log("users.controller.js: TheCurrent USer is: ", user.username);
                 res.send(user);
             } else {
                 res.sendStatus(404);
