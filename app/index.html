@@ -17,14 +17,13 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home"><span class="glyphicon glyphicon-home"> Home</a></li>
-                    <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account"><span class="glyphicon glyphicon-user"> Account</a></li>
-                        
                     <!--added by jeremy -->
                     <li ng-class="{active: activeTab === 'report'}"><a ui-sref="report"><span class="glyphicon glyphicon-list-alt"> Report</a></li>  
-					<li ng-class="{active: activeTab === 'manageUsers'}" ng-show="isAdmin"><a ui-sref="manageUsers"><span class="glyphicon glyphicon-tasks"> Manage Accounts</a></li>                          
+					<li ng-class="{active: activeTab === 'manageUsers'}" ng-show="isAdmin"><a ui-sref="manageUsers"><span class="glyphicon glyphicon-tasks">Manage Accounts</a></li>                          
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/login"><span class="glyphicon glyphicon-log-out" ng-click="logout()"></span> Logout</a></li>
+                    <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account"><span class="glyphicon glyphicon-user"></a></li>
+                    <li><a href="/login"><span class="glyphicon glyphicon-log-out" ng-click="logout()"></span></a></li>
                 </ul>
             </div>
         </nav>

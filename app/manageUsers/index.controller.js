@@ -47,6 +47,10 @@
 
         };
 
+        $scope.clearField = function(){
+            $scope.aUsers = "";
+        }
+
         $scope.editUser = function(index){
             console.log('index is '+index+' userid is '+$scope.allUsers[index]._id);
             $scope.aUsers = $scope.allUsers[index];
