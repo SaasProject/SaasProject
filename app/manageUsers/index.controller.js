@@ -81,28 +81,26 @@
 		
 		vm.updateUser = function() {
 			
-			//console.log(index);
+			 if($scope.aUsers.role.length===0 
+                || $scope.aUsers.firstName.length===0 
+                || $scope.aUsers.lastName.length===0  
+                || $scope.aUsers.username.length===0  
+                || $scope.aUsers.email.length===0 ){
+					console.log("wew");
+					FlashService.Error('Please Fill up all the textfields');
+				} else {
 			
-			// var toDel = vm.user[index];
-			// console.log(toDel._id);
-			// console.log(toDel.username);
-			
-            UserService.Update($scope.aUsers)
-                .then(function () {
-				 $scope.aUsers = {
-            role: '',
-            firstName: '',
-            lastName: '',
-            username: '',
-            email: ''
-        };
-                    FlashService.Success('User updated');
+					UserService.Update($scope.aUsers)
+						.then(function () {
+							$scope.aUsers = {role: '', firstName: '', lastName: '', username: '', email: ''};
+							FlashService.Success('User updated');
+							initController();
+					})
 					
-					
-                })
-                .catch(function (error) {
-                    FlashService.Error(error);
-                });
+					.catch(function (error) {
+						FlashService.Error(error);
+					});
+				}
         }
 		
 		
