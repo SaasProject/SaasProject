@@ -1,7 +1,7 @@
 <h3>Generate Report</h3>
 <div class="container" ng-show="assets.length > 0">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-sm-3">
             <div class="panel panel-primary">
                 <div class="panel-heading">Select Warehouse</div>
                 <div class="panel-body">
@@ -12,19 +12,19 @@
                 </div>
             </div>
             <div class="panel panel-success">
-                    <div class="panel-heading">Download</div>
-                    <div class="panel-body">
-                        <label for="filename">Export table in CSV format</label>
-                        <div class="form-inline">
-                            <input id="filename" type="text" placeholder="Enter filename..." ng-model="filename" class="form-control">  
-                            <button type="button" class="btn btn-success {{filtered_assets.length == 0 ? 'disabled' : ''}}" ng-csv="filtered_assets" csv-header="columns" filename="{{filename || 'test'}}.csv">
-                                <span class="glyphicon glyphicon-download-alt"></span>
-                            </button>
-                        </div>                                    
-                    </div>
+                <div class="panel-heading">Download</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="filename">Export table in CSV format</label>                                
+                        <input id="filename" type="text" placeholder="Enter filename..." ng-model="filename" class="form-control">  
+                        <button type="button" class="btn btn-success" ng-csv="filtered_assets" csv-header="columns" filename="{{filename || 'test'}}.csv">
+                            <span class="glyphicon glyphicon-download-alt"></span>
+                        </button>
+                    </div>                                    
                 </div>
+            </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-sm-8">
             <table class="table table-hover">
                 <thead>
                     <tr> 
