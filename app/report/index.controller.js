@@ -3,16 +3,30 @@
  
     angular
         .module('app')
-        .controller('Report.IndexController', Controller);
+        .controller('Report.IndexController', Controller)
+        //filter function for pagination of assets
+        .filter('pagination', function(){
+            return function(data, start){
+                //data is an array. slice is removing all items past the start point
+                return data.slice(start);
+            };
+        });
+
+
  
     function Controller($window, AssetService, FlashService, $scope) {
  
+        //initialization
         $scope.assets = [];
         $scope.warehouses = [];
+        $scope.currentPage = 1;
+        $scope.pageSize = 10;
+
+        //get all assets
         AssetService.GetAll().then(function(assets){
-            if(assets.length > 0){
-                console.log('you retrieved all assets');
-                //console.log(assets);                
+            if(assets.length > 0){               
+
+                //store to array
                 $scope.assets = assets;
 
                 //get the fields of assets. since it is assumed that schema is fixed, you can get fields on any object
@@ -21,8 +35,6 @@
 
                 //value is the current asset in assets, key is index
                 angular.forEach($scope.assets, function(value, key){
-                    //console.log(key);
-                    //console.log(value.warehouse);
 
                     //check if warehouse already exists. if yes, don't add.
                     //this is to eliminate duplicates in datalist
@@ -30,25 +42,14 @@
                         $scope.warehouses.push(value.warehouse);
                     } 
                 });
-               // console.log($scope.columns);
             }
             else{
                 //perform notification here
                 FlashService.Error("No assets found");
-                console.log('No assets found');
             }
         }, function(){
             //perform notification here
             FlashService.Error("An error occurred");
-            console.log('error');
-        });
-
-        //to get filtered assets in the table
-        //source: https://stackoverflow.com/questions/11721863/angularjs-how-to-get-an-ngrepeat-filtered-result-reference
-        $scope.$watch(function(){
-            //search.warehouse is ng-model of warehouse input field (generateReport.html). this specifies that the filter is only for warehouse column
-            //source: https://stackoverflow.com/questions/14733136/ng-repeat-filter-by-single-field
-            $scope.filtered_assets = $scope.$eval("assets | filter : search | orderBy: 'asset_id'");
         });
     }
  

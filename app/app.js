@@ -2,7 +2,7 @@
     'use strict';
  
     angular
-        .module('app', ['ui.router', 'ngSanitize', 'ngCsv'])
+        .module('app', ['ui.router', 'ngSanitize', 'ngCsv', 'ui.bootstrap'])
         .config(config)
         .run(run);
  
@@ -55,7 +55,6 @@
 
                     //401 is unauthorized error, meaning token has expired 
                     if(rejection.status == 401){
-                        console.log('ERROR CAUGHT!');
                         alert('Your session has expired. Click Ok to login again');
                         $window.location.href = "/login";
                     }
@@ -80,7 +79,6 @@
         //get current user and set details to rootScope
         $http.get('/api/users/isAdmin').success(function(response){
             //response is true if user is admin from api/users.controller.js
-            console.log('app.js: response is ', response);
             if(response){
 
                 // Determine if user is admin

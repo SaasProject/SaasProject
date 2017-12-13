@@ -3,12 +3,14 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="panel panel-primary">
-                <div class="panel-heading">Select Warehouse</div>
+                <div class="panel-heading">Settings</div>
                 <div class="panel-body">
-                    <select class="form-control" ng-model="search.warehouse">
-                        <option value="">All</option>
-                        <option ng-repeat="warehouse in warehouses">{{warehouse}}</option>
-                    </select>                            
+                    <div class="form-group">
+                        <label for="search">Search</label>
+                        <input id="search" type="text" ng-model="search" class="form-control">     
+                        <label for="pageSize">Items per page</label>
+                        <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{assets.length}}>                     
+                    </div>                            
                 </div>
             </div>
             <div class="panel panel-success">
@@ -17,7 +19,7 @@
                     <div class="form-group">
                         <label for="filename">Export table in CSV format</label>                                
                         <input id="filename" type="text" placeholder="Enter filename..." ng-model="filename" class="form-control">  
-                        <button type="button" class="btn btn-success" ng-csv="filtered_assets" csv-header="columns" filename="{{filename || 'test'}}.csv">
+                        <button type="button" class="btn btn-success" ng-csv="assets | filter: search" csv-header="columns" filename="{{filename || 'test'}}.csv">
                             <span class="glyphicon glyphicon-download-alt"></span>
                         </button>
                     </div>                                    
@@ -32,11 +34,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="asset in filtered_assets">
+                    <tr ng-repeat="asset in assets | filter : search | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
                         <td ng-repeat="column in columns">{{$parent.asset[column]}}</td>
                     </tr>
                 </tbody>
             </table>
+            <ul uib-pagination total-items="assets.length" ng-model="currentPage" items-per-page="pageSize"></ul>
         </div>
     </div>
 </div>
