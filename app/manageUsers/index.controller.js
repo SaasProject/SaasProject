@@ -12,6 +12,7 @@
 
         // Scope for users data
         $scope.aUsers = {
+            _id: '',
             role: '',
             firstName: '',
             lastName: '',
@@ -40,6 +41,14 @@
             UserService.Insert($scope.aUsers)
                 .then(function () {
                     FlashService.Success('User updated');
+                    $scope.aUsers = {
+                        role: '',
+                        firstName: '',
+                        lastName: '',
+                        username: '',
+                        email: ''
+                    };
+                    initController();
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
@@ -53,7 +62,16 @@
 
         $scope.editUser = function(index){
             console.log('index is '+index+' userid is '+$scope.allUsers[index]._id);
-            $scope.aUsers = $scope.allUsers[index];
+            //$scope.aUsers = $scope.allUsers[index];
+
+            $scope.aUsers._id = $scope.allUsers[index]._id;
+            $scope.aUsers.role = $scope.allUsers[index].role;
+            $scope.aUsers.firstName = $scope.allUsers[index].firstName;
+            $scope.aUsers.lastName = $scope.allUsers[index].lastName;
+            $scope.aUsers.username = $scope.allUsers[index].username;
+            $scope.aUsers.email = $scope.allUsers[index].email;
+
+            console.log($scope.aUsers._id);
         };
 		
 		
@@ -67,15 +85,15 @@
 			
             UserService.Update($scope.aUsers)
                 .then(function () {
-				 $scope.aUsers = {
-            role: '',
-            firstName: '',
-            lastName: '',
-            username: '',
-            email: ''
-        };
+				    $scope.aUsers = {
+                        role: '',
+                        firstName: '',
+                        lastName: '',
+                        username: '',
+                        email: ''
+                    };
                     FlashService.Success('User updated');
-					
+                    initController();
 					
                 })
                 .catch(function (error) {
