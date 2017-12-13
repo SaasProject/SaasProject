@@ -9,9 +9,7 @@
         var vm = this;
  
         vm.user = null;
-
-        var modal = $scope.myModal;
-
+        
         // Scope for users data
         $scope.aUsers = {
             role: '',
