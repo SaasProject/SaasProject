@@ -18,7 +18,8 @@
             firstName: '',
             lastName: '',
             username: '',
-            email: ''
+            email: '',
+            password:''
         };
  
         initController();
@@ -39,6 +40,11 @@
         // added adduser function
         $scope.addUser = function(){
             console.log($scope.aUsers);
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for (var i = 0; i < 10; i++){
+                $scope.aUsers.password += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            console.log($scope.aUsers.password);
             if($scope.aUsers.role.length===0 
                 || $scope.aUsers.firstName.length===0 
                 || $scope.aUsers.lastName.length===0  
@@ -49,12 +55,6 @@
             }else{
             UserService.Insert($scope.aUsers)
                 .then(function () {
-                    console.log($scope.aUsers.role);
-                    console.log($scope.aUsers.firstName);
-                    console.log($scope.aUsers.lastName);
-                    console.log($scope.aUsers.username);
-                    console.log($scope.aUsers.email);
-                    console.log("wew");
                     FlashService.Success('User updated');
                 })
                 .catch(function (error) {
