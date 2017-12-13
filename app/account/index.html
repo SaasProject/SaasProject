@@ -1,4 +1,8 @@
 <h1>My Account</h1>
+<!-- flash message div -->
+<div class="flash-message" ng-if="flash">
+    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+</div>
 <div class="form-container">
     <form method="post">
         <div class="form-group">

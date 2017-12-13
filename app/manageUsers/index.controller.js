@@ -10,9 +10,10 @@
  
         vm.user = null;
 
+        var modal = $scope.myModal;
+
         // Scope for users data
         $scope.aUsers = {
-            _id: '',
             role: '',
             firstName: '',
             lastName: '',
@@ -38,40 +39,43 @@
         // added adduser function
         $scope.addUser = function(){
             console.log($scope.aUsers);
+            if($scope.aUsers.role.length===0 
+                || $scope.aUsers.firstName.length===0 
+                || $scope.aUsers.lastName.length===0  
+                || $scope.aUsers.username.length===0  
+                || $scope.aUsers.email.length===0 ){
+                console.log("wew");
+                FlashService.Error('Please Fill up all the textfields');
+            }else{
             UserService.Insert($scope.aUsers)
                 .then(function () {
+                    console.log($scope.aUsers.role);
+                    console.log($scope.aUsers.firstName);
+                    console.log($scope.aUsers.lastName);
+                    console.log($scope.aUsers.username);
+                    console.log($scope.aUsers.email);
+                    console.log("wew");
                     FlashService.Success('User updated');
-                    $scope.aUsers = {
-                        role: '',
-                        firstName: '',
-                        lastName: '',
-                        username: '',
-                        email: ''
-                    };
-                    initController();
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
                 });
-
+            }
         };
 
         $scope.clearField = function(){
-            $scope.aUsers = "";
+            $scope.aUsers = {
+            role: '',
+            firstName: '',
+            lastName: '',
+            username: '',
+            email: ''
+            };
         }
 
         $scope.editUser = function(index){
             console.log('index is '+index+' userid is '+$scope.allUsers[index]._id);
-            //$scope.aUsers = $scope.allUsers[index];
-
-            $scope.aUsers._id = $scope.allUsers[index]._id;
-            $scope.aUsers.role = $scope.allUsers[index].role;
-            $scope.aUsers.firstName = $scope.allUsers[index].firstName;
-            $scope.aUsers.lastName = $scope.allUsers[index].lastName;
-            $scope.aUsers.username = $scope.allUsers[index].username;
-            $scope.aUsers.email = $scope.allUsers[index].email;
-
-            console.log($scope.aUsers._id);
+            $scope.aUsers = $scope.allUsers[index];
         };
 		
 		
@@ -85,15 +89,15 @@
 			
             UserService.Update($scope.aUsers)
                 .then(function () {
-				    $scope.aUsers = {
-                        role: '',
-                        firstName: '',
-                        lastName: '',
-                        username: '',
-                        email: ''
-                    };
+				 $scope.aUsers = {
+            role: '',
+            firstName: '',
+            lastName: '',
+            username: '',
+            email: ''
+        };
                     FlashService.Success('User updated');
-                    initController();
+					
 					
                 })
                 .catch(function (error) {
