@@ -48,7 +48,7 @@
         $scope.$watch(function(){
             //search.warehouse is ng-model of warehouse input field (generateReport.html). this specifies that the filter is only for warehouse column
             //source: https://stackoverflow.com/questions/14733136/ng-repeat-filter-by-single-field
-            $scope.filtered_assets = $scope.$eval("assets | filter : search");
+            $scope.filtered_assets = $scope.$eval("assets | filter : search | orderBy: 'asset_id'");
         });
     }
  
