@@ -28,11 +28,12 @@
         $scope.currentPage = 1;
         $scope.pageSize = 10;
         
-        $scope.$watch(function(){
+        //MUKHANG NAGPAPABAGAL ITUU
+        /* $scope.$watch(function(){
             $interval(function(){
                 $scope.filename = "Report " + $filter('date')(new Date(), "yyyy-MM-dd h:mma");
             }, 1000);
-        });
+        }); */
 
 
         //get all assets
