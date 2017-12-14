@@ -147,10 +147,8 @@ function getAdminUser(req, res) {
         .then(function (user) {
             if(user) {
                 if (user.role == 'Admin') {
-                    console.log("users.controller.js: The user is admin");
                     res.send(true);
                 } else {
-                    console.log("users.controller.js: The user is not admin");
                     res.send(false);
                 }
             } else {
