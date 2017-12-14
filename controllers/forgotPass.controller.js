@@ -19,10 +19,8 @@ router.get('/', function (req, res) {
 });
  
 router.post('/', function (req, res) {
-    console.log('hello1');
     var crypto = require("crypto");
     var tempPass = crypto.randomBytes(4).toString('hex');
-    console.log(tempPass);
     req.body.tempPass = tempPass;
 
     // authenticate using api to maintain clean separation between layers
@@ -31,8 +29,6 @@ router.post('/', function (req, res) {
         form: req.body,
         json: true
     }, function (error, response, body) {
-        console.log('hello2');
-        console.log(req.body.email);
         if (error) {
             return res.render('login', { error: 'An error occurred' });
         }
