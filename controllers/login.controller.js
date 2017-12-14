@@ -10,8 +10,14 @@ router.get('/', function (req, res) {
     // move success message into local variable so it only appears once (single read)
     var viewData = { success: req.session.success };
     delete req.session.success;
- 
-    res.render('login', viewData);
+    
+    
+    if(req.query.expired){
+        res.render('login', {error: 'Your session has expired'});
+    }
+    else{
+        res.render('login', viewData);
+    }
 });
  
 router.post('/', function (req, res) {

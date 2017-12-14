@@ -48,15 +48,23 @@
 
         // added by jeremy
         // this is to intercept all errors. when 401 is received, must redirect to login
-        $httpProvider.interceptors.push(function($q, $window){
+        $httpProvider.interceptors.push(function($q, $window, $location){
             return {
                 'responseError': function(rejection){
                     var defer = $q.defer();
 
                     //401 is unauthorized error, meaning token has expired 
                     if(rejection.status == 401){
-                        alert('Your session has expired. Click Ok to login again');
-                        $window.location.href = "/login";
+                        //this is done to imitate the returnUrl in app.controller.js 
+                        //when accessing pages that requires login
+
+                        //pathname only shows /app/ which is wrong
+                        //so get fullpath first then get substring starting from pathname
+                        var fullpath = $window.location.href;
+                        var returnUrl = fullpath.substring(fullpath.indexOf($window.location.pathname));
+
+                        //add expired query to explicitly state that the session has expired and not just trying to access via typing the address
+                        $window.location.href = '/login?returnUrl=' + encodeURIComponent(returnUrl) + '&expired=true';
                     }
 
                     defer.reject(rejection);
