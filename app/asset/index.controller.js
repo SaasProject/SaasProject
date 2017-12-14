@@ -27,13 +27,10 @@
         $scope.warehouses = [];
         $scope.currentPage = 1;
         $scope.pageSize = 10;
-        
-        //MUKHANG NAGPAPABAGAL ITUU
-        /* $scope.$watch(function(){
-            $interval(function(){
-                $scope.filename = "Report " + $filter('date')(new Date(), "yyyy-MM-dd h:mma");
-            }, 1000);
-        }); */
+
+        $scope.setFilename = function(){
+            return "Report " + $filter('date')(new Date(), "yyyy-MM-dd h:mma");
+        };
 
 
         //get all assets
