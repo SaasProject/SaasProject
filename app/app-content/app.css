@@ -5,3 +5,25 @@ body {
 .flash-message {
     margin-top: 20px;
 }
+
+.arrow-down:after,.arrow-up:after{
+ content: ' ';
+ position: relative;
+ left: 2px;
+ border: 8px solid transparent;
+}
+
+.arrow-down:after{
+ top: 10px;
+ border-top-color: gray;
+}
+
+.arrow-up:after{
+ bottom: 15px;
+ border-bottom-color: gray;
+}
+
+.arrow-down,.arrow-up{
+ padding-right: 10px;
+}
+
