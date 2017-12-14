@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
     var viewData = { success: req.session.success };
     delete req.session.success;
  
-    res.render('forgotPass', viewData);
+    res.render('login', viewData);
 });
  
 router.post('/', function (req, res) {
@@ -34,11 +34,11 @@ router.post('/', function (req, res) {
         console.log('hello2');
         console.log(req.body.email);
         if (error) {
-            return res.render('forgotPass', { error: 'An error occurred' });
+            return res.render('login', { error: 'An error occurred' });
         }
  
         if (!response.body) {
-            return res.render('forgotPass', { error: 'email address is not registered', email: req.body.email });
+            return res.render('login', { error: 'email address is not registered', email: req.body.email });
         }
 
        sendingMail(response.body) ;
@@ -70,7 +70,7 @@ router.post('/', function (req, res) {
                 service: 'gmail',
                 auth: {
                     user: 'saasteamaws@gmail.com', // generated ethereal user
-                    pass: 'Tanungin si dyan0'  // generated ethereal password
+                    pass: '12angDum^^y'  // generated ethereal password
                 }
             });
         
