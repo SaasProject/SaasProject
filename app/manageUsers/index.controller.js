@@ -46,7 +46,7 @@
                 for (var i = 0; i < 10; i++){
                     $scope.aUsers.password += possible.charAt(Math.floor(Math.random() * possible.length));
                 }
-                console.log($scope.aUsers.password);
+                //console.log($scope.aUsers.password);
 
                 UserService.Insert($scope.aUsers)
                     .then(function () {
