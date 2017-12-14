@@ -3,7 +3,7 @@
  
     angular
         .module('app')
-        .controller('Report.IndexController', Controller)
+        .controller('Asset.IndexController', Controller)
         //filter function for pagination of assets
         .filter('pagination', function(){
             return function(data, start){
@@ -21,6 +21,10 @@
         $scope.warehouses = [];
         $scope.currentPage = 1;
         $scope.pageSize = 10;
+        
+        var fulldate = new Date();
+        var date = fulldate.getFullYear() + "-" + fulldate.getMonth() + "-" + fulldate.getDate();
+        $scope.filename = "Report " + date;
 
         //get all assets
         AssetService.GetAll().then(function(assets){

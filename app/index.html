@@ -18,7 +18,7 @@
                 <ul class="nav navbar-nav">
                     <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                     <!--added by jeremy -->
-                    <li ng-class="{active: activeTab === 'report'}"><a ui-sref="report"><span class="glyphicon glyphicon-list-alt"></span> Report</a></li>  
+                    <li ng-class="{active: activeTab === 'asset'}"><a ui-sref="asset"><span class="glyphicon glyphicon-list-alt"></span> Assets</a></li>  
 					<li ng-class="{active: activeTab === 'manageUsers'}" ng-show="isAdmin"><a ui-sref="manageUsers"><span class="glyphicon glyphicon-tasks"></span> Manage Accounts</a></li>                          
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -65,7 +65,7 @@
 
     <!-- added by jeremy -->
     <script src="app-services/asset.service.js"></script>    
-    <script src="report/index.controller.js"></script>
+    <script src="asset/index.controller.js"></script>
     
 </body>
 </html>

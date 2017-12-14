@@ -36,13 +36,13 @@
             })
             
             //added by jeremy
-            .state('report', {
-                url: '/report',
-                templateUrl: 'report/index.html',
-                controller: 'Report.IndexController',
+            .state('asset', {
+                url: '/asset',
+                templateUrl: 'asset/index.html',
+                controller: 'Asset.IndexController',
                 //not yet used
                 controllerAs: 'vm',
-                data: {activeTab: 'report'}
+                data: {activeTab: 'asset'}
             });
 
 

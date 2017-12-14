@@ -1,0 +1,94 @@
+<div class="container" ng-show="assets.length > 0">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Settings</div>
+                <div class="panel-body">
+                    <div class="form-inline">
+                        <label for="search">Search</label>
+                        <input id="search" type="text" ng-model="search" class="form-control">     
+                        <label for="pageSize">Items per page</label>
+                        <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{assets.length}}>                     
+                    </div>                            
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">Generate Report</div>
+                <div class="panel-body">
+                    <div class="form-inline">
+                        <input id="filename" type="text" ng-model="filename" class="form-control" readonly >  
+                        <button type="button" class="btn btn-success" ng-csv="assets | filter: search" csv-header="columns" filename="{{filename}}.csv" ng-click="">
+                            <span class="glyphicon glyphicon-download-alt"></span>
+                        </button>
+                    </div>                                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr> 
+                        <th ng-repeat="column in columns">{{column | uppercase}}</th>        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="asset in assets | filter : search | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
+                        <td ng-repeat="column in columns">{{$parent.asset[column]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul uib-pagination total-items="assets.length" ng-model="currentPage" items-per-page="pageSize"></ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- <h3>Generate Report</h3>
+<div class="container" ng-show="assets.length > 0">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Settings</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="search">Search</label>
+                        <input id="search" type="text" ng-model="search" class="form-control">     
+                        <label for="pageSize">Items per page</label>
+                        <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{assets.length}}>                     
+                    </div>                            
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">Download</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="filename">Export table in CSV format</label>                                
+                        <input id="filename" type="text" placeholder="Enter filename..." ng-model="filename" class="form-control">  
+                        <button type="button" class="btn btn-success" ng-csv="assets | filter: search" csv-header="columns" filename="{{filename || 'test'}}.csv">
+                            <span class="glyphicon glyphicon-download-alt"></span>
+                        </button>
+                    </div>                                    
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <table class="table table-hover">
+                <thead>
+                    <tr> 
+                        <th ng-repeat="column in columns">{{column | uppercase}}</th>        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="asset in assets | filter : search | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
+                        <td ng-repeat="column in columns">{{$parent.asset[column]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul uib-pagination total-items="assets.length" ng-model="currentPage" items-per-page="pageSize"></ul>
+        </div>
+    </div>
+</div> -->
