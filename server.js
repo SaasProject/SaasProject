@@ -28,8 +28,6 @@ app.use('/api/users', require('./controllers/api/users.controller'));
  
 //added by jeremy
 app.use('/api/assets', require('./controllers/api/assets.controller'));
-// added by dyan0
-app.use('/forgotPass', require('./controllers/forgotPass.controller'));
 
 // make '/app' default route
 app.get('/', function (req, res) {
