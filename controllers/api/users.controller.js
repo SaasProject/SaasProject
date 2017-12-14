@@ -94,7 +94,7 @@ function addUser(req, res) {
                 service: 'gmail',
                 auth: {
                     user: 'saasteamaws@gmail.com', // generated ethereal user
-                    pass: 'Ibinigay na to ni dyan0'  // generated ethereal password
+                    pass: '12angDum^^y'  // generated ethereal password
                 }
             });
         
