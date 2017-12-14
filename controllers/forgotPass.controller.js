@@ -58,7 +58,7 @@ router.post('/', function (req, res) {
                     <li>Temporary Password: ${temp}</li>
                 </ul>
                 <h3>Message</h3>
-                <p>${req.body.message}</p>
+                <p>Please change your password as soon as possible.</p>
             `;
         
             // create reusable transporter object using the default SMTP transport
@@ -74,8 +74,8 @@ router.post('/', function (req, res) {
             let mailOptions = {
                 from: '"SaaS Team 👻" <saasteamaws@gmail.com>', // sender address
                 to: req.body.email, // list of receivers
-                subject: 'Hello ✔', // Subject line
-                text: 'Hello world?', // plain text body
+                subject: 'Recover Account', // Subject line
+                text: 'Temporary Password', // plain text body
                 html: output // html body
             };
         
