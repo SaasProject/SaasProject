@@ -59,7 +59,12 @@
                         FlashService.Success('Asset Added');
                     })
                     .catch(function (error) {
-                        FlashService.Error(error);
+                        if(error.code == 11000){
+                            FlashService.Error('Tag already exists');                            
+                        }
+                        else{
+                            FlashService.Error(error.errmsg);
+                        }
                     });
                 }
         };
