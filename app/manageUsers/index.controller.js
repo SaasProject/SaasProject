@@ -162,7 +162,7 @@
                 || $scope.aUsers.email.length===0 ){
 					FlashService.Error('Please Fill up all the textfields');
 				} else {
-			
+			          console.log($scope.aUsers);
 					UserService.Update($scope.aUsers)
 						.then(function () {
 							$scope.aUsers = {role: '', firstName: '', lastName: '', username: '', email: ''};
