@@ -1,4 +1,7 @@
 <h2>Manage User Accounts</h2>
+<div class="flash-message" ng-if="flash">
+	<div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+</div>
 <div class="container">
 
   <!-- Modal -->
@@ -8,13 +11,10 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Add User</h4>
+	        <h4 class="modal-title">Add User</h4>
         </div>
         <div class="modal-body">
           <form>
-          	<div class="flash-message" ng-if="flash">
-        		<div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
-    		</div>
 		    <label for="firstName">First Name: </label>
 		    <input id="firstName" type="text" ng-model="aUsers.firstName" class="form-control" required><br>
 		    <label for="lastName">Last Name: </label>
@@ -29,7 +29,7 @@
 		    	<option value="User">User</option>
 		    </select><br>
 
-			<button class="btn btn-primary" ng-click="addUser()">Add User</button>
+			<button class="btn btn-primary" ng-click="addUser()" data-dismiss="modal">Add User</button>
 			<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
           </form>
         </div>
