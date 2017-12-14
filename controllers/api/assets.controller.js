@@ -3,6 +3,8 @@ var router = express.Router();
 var assetService = require('services/asset.service');
 
 router.get('/getAll', getAllAssets);
+router.post('/addAsset', addAsset);
+
 
 module.exports = router;
 
@@ -19,4 +21,13 @@ function getAllAssets(req, res){
     }).catch(function(err){
         res.status(400).send(err);
     });
+}
+function addAsset(req, res){
+    assetService.addAsset(req.body).then(function(){
+
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
 }

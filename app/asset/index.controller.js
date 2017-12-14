@@ -17,6 +17,12 @@
     function Controller($window, AssetService, FlashService, $scope) {
  
         //initialization
+        $scope.newAsset = {
+            tag: '',
+            name: '',
+            warehouse: '',
+            status: ''
+        };
         $scope.assets = [];
         $scope.warehouses = [];
         $scope.currentPage = 1;
@@ -55,6 +61,16 @@
             //perform notification here
             FlashService.Error("An error occurred");
         });
-    }
- 
+
+        $scope.addAsset = function(){
+            console.log($scope.newAssets);
+            AssetService.addAsset($scope.newAssets)
+                    .then(function () {
+                        FlashService.Success('Asset Added');
+                    })
+                    .catch(function (error) {
+                        FlashService.Error(error);
+                    });
+                }
+        };
 })();

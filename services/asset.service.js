@@ -6,6 +6,7 @@ var Asset = mongoose.model('Asset');
 var service = {};
 
 service.getAll = getAll;
+service.addAsset = addAsset;
 
 module.exports = service;
 
@@ -28,5 +29,20 @@ function getAll(){
         }
     });
 
+    return deferred.promise;
+}
+
+function addAsset(assetParam){
+    var deferred = Q.defer();
+
+    console.log(assetParam)
+
+
+    Asset.create(assetParam, function(err){
+        if (err) deferred.reject(err);
+        console.log(err)
+        deferred.resolve();
+    });
+        
     return deferred.promise;
 }

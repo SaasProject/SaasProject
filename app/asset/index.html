@@ -1,4 +1,35 @@
+<h2>Assets</h2>
+<div class="flash-message" ng-if="flash">
+    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+</div>
 <div class="container" ng-show="assets.length > 0">
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Asset</button><br></br>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add User</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+                <label for="asset_id">Tag: </label>
+                <input id="asset_id" type="text" ng-model="newAssets.tag" class="form-control" required><br>
+                <label for="name">Name: </label>
+                <input id="name" type="text" ng-model="newAssets.name" class="form-control" required><br>
+                <label for="warehouse">Warehouse </label>
+                <input id="warehouse" type="text" ng-model="newAssets.warehouse" class="form-control" required><br>
+                <label for="status">status: </label>
+                <input id="status" type="text" ng-model="newAssets.status" class="form-control" required><br>
+
+                <button class="btn btn-primary" ng-click="addAsset()" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-primary">

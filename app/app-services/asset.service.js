@@ -9,11 +9,16 @@
         var service = {};
  
         service.GetAll = GetAll;
+        service.addAsset = addAsset;
  
         return service;
  
         function GetAll() {
             return $http.get('/api/assets/getAll').then(handleSuccess, handleError);
+        }
+
+        function addAsset(assets) {
+            return $http.post('/api/assets/addAsset', assets).then(handleSuccess, handleError);
         }
   
         // private functions
