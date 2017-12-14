@@ -46,8 +46,8 @@
         $scope.currentPage = 1;
         $scope.pageSize = 10;
 
-        // User List Array for paging
-        $scope.userLength = 0;
+        // make user list index independent in each page
+        $scope.number = ($scope.$index + 1) + ($scope.currentPage - 1) * $scope.pageSize;
         
         // Scope for users data
         $scope.aUsers = {
@@ -69,7 +69,6 @@
 
         // called on header click
         $scope.sortColumn = function(col){
-            console.log('column', col);
             $scope.column = col;
             if($scope.reverse){
                 $scope.reverse = false;
@@ -118,7 +117,6 @@
                 for (var i = 0; i < 10; i++){
                     $scope.aUsers.password += possible.charAt(Math.floor(Math.random() * possible.length));
                 }
-                console.log($scope.aUsers.password);
 
                 UserService.Insert($scope.aUsers)
                     .then(function () {
@@ -140,8 +138,18 @@
             };
         }
 
+        //filter function for pagination indexes
+        function filterIndexById(input, id) {
+            var i=0, len=Object.size(input);
+            for (i=0; i<len; i++) {
+                if (input[i]._id == id) {
+                    return input[i];
+                }
+            }
+        }
+
         $scope.editUser = function(index){
-            $scope.aUsers = $scope.allUsers[index];
+            $scope.aUsers = filterIndexById($scope.allUsers, index);
         };
 		
 		
@@ -166,11 +174,7 @@
 						FlashService.Error(error);
 					});
 				}
-        }
-		
-		
-		
-		
+        }		
 		
 		//deleteUser function
 		vm.deleteUser = function(index) {
@@ -194,13 +198,3 @@
     }
  
 })();
-
-/*
-userService.query({usertype: 'user'}).$promise.then(function(results){ 
-       
-       $scope.nonAdminUsers = results;
-    }, function(error) {
-      
-       $scope.nonAdminUsers = [];
-    });
-*/
