@@ -52,7 +52,7 @@
 				</div>
         
 				<div class="modal-body">
-					<form ng-submit = "vm.updateUser()">
+					<form>
 					
 						<div class="form-group">
 							<label for="fname">Firstname</label>
@@ -82,8 +82,8 @@
 							</select>
 						</div>
 						
-						<button type = "submit" class = "btn submit-btn">Save</button>
-						<button class="btn submit-btn" data-dismiss="modal">Cancel</button>
+						<button class = "btn btn-primary" ng-click = "vm.updateUser()" data-dismiss = "modal">Save</button>
+						<button class= "btn btn-danger" data-dismiss="modal">Cancel</button>
 					</form>
 				</div>
 			</div>
