@@ -10,6 +10,7 @@
  
         service.GetAll = GetAll;
         service.addAsset = addAsset;
+		service.Delete = Delete;
  
         return service;
  
@@ -19,6 +20,10 @@
 
         function addAsset(assets) {
             return $http.post('/api/assets/addAsset', assets).then(handleSuccess, handleError);
+        }
+		
+		 function Delete(tag) {
+            return $http.delete('/api/assets/' + tag).then(handleSuccess, handleError);
         }
   
         // private functions

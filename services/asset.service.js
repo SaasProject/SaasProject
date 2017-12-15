@@ -7,6 +7,7 @@ var service = {};
 
 service.getAll = getAll;
 service.addAsset = addAsset;
+service.delete = _delete;
 
 module.exports = service;
 
@@ -44,5 +45,22 @@ function addAsset(assetParam){
         deferred.resolve();
     });
         
+    return deferred.promise;
+}
+
+
+function _delete(tag) {
+    var deferred = Q.defer();
+	
+	console.log(tag);
+ 
+     Asset.remove(
+        { tag },
+        function (err) {
+            if (err) deferred.reject(err);
+ 
+            deferred.resolve();
+        });
+ 
     return deferred.promise;
 }

@@ -4,6 +4,7 @@ var assetService = require('services/asset.service');
 
 router.get('/getAll', getAllAssets);
 router.post('/addAsset', addAsset);
+router.delete('/:_id', deleteAsset);
 
 
 module.exports = router;
@@ -25,6 +26,19 @@ function getAllAssets(req, res){
 function addAsset(req, res){
     assetService.addAsset(req.body).then(function(){
 
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+}
+
+function deleteAsset(req, res) {
+    var assetId = req.params._id
+ 
+ 
+    assetService.delete(assetId)
+        .then(function () {
             res.sendStatus(200);
         })
         .catch(function (err) {
