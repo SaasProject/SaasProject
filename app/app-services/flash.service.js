@@ -35,6 +35,7 @@
  
         function Success(message, keepAfterLocationChange) {
             $rootScope.flash = {
+                show: true,
                 message: message,
                 type: 'success',
                 keepAfterLocationChange: keepAfterLocationChange
@@ -43,6 +44,7 @@
  
         function Error(message, keepAfterLocationChange) {
             $rootScope.flash = {
+                show: true,
                 message: message,
                 type: 'danger',
                 keepAfterLocationChange: keepAfterLocationChange
