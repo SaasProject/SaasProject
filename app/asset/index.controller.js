@@ -35,11 +35,17 @@
             return "Report " + $filter('date')(new Date(), "yyyy-MM-dd h:mma");
         };
 
-        //when a header is clicked, set the orderBy to the current column. then reverse the order by using "!""
+        //when a table header is clicked, set the orderBy to the current column. then reverse the order by using "!""
         $scope.setTo = function(column){
             $scope.sortColumn = column;
             $scope.reverse = !$scope.reverse;
         };
+
+        //need to store filtered assets to correct total items in pagination
+        //this is so that the number of pages are correct
+        $scope.$watch(function(){
+            $scope.filtered_assets = $scope.$eval("assets | filter: search");
+        });
 
         function getAllAssets(){
             //get all assets

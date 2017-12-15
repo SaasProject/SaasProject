@@ -3,7 +3,6 @@
     <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
 </div>
 <div class="container">
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Asset</button><br></br>
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
         
@@ -36,12 +35,16 @@
                 <div class="panel-heading">Settings</div>
                 <div class="panel-body">
                     <div class="form-inline">
+                        <label for="addButton">Add New Asset: </label>     
+                        <button type="addButton" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                            Add <span class="glyphicon glyphicon-plus"></span>
+                        </button>
                         <label for="search">Search: </label>
                         <input id="search" type="text" ng-model="search" class="form-control">     
                         <label for="pageSize">Items per page: </label>
                         <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{assets.length}}>                     
-                        <label for="search">Generate Report: </label>                        
-                        <button type="button" class="btn btn-success" ng-csv="assets | filter: search" csv-header="columns" filename="{{setFilename()}}.csv">
+                        <label for="reportButton">Generate Report: </label>                        
+                        <button type="reportButton" class="btn btn-success" ng-csv="assets | filter: search" csv-header="columns" filename="{{setFilename()}}.csv">
                             Download <span class="glyphicon glyphicon-download-alt"></span>
                         </button>
                     </div>                            
@@ -58,12 +61,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="asset in assets | filter : search | orderBy: sortColumn : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
+                    <tr ng-repeat="asset in filtered_assets | filter : search | orderBy: sortColumn : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
                         <td ng-repeat="column in columns">{{$parent.asset[column]}}</td>
                     </tr>
                 </tbody>
             </table>
-            <ul uib-pagination total-items="assets.length" ng-model="currentPage" items-per-page="pageSize" boundary-links="true" max-size="4" force-ellipses="true"></ul>
+            <ul uib-pagination total-items="filtered_assets.length" ng-model="currentPage" items-per-page="pageSize" boundary-links="true" max-size="4" force-ellipses="true"></ul>
         </div>
     </div>
 </div>
