@@ -34,6 +34,15 @@
             return "Report " + $filter('date')(new Date(), "yyyy-MM-dd h:mma");
         };
 
+        $scope.getFilteredAssets = function(){
+            var temp = [];
+            temp = $scope.filtered_assets;
+            angular.forEach(temp, function(value, key){
+                delete value["_id"];
+            });
+            return temp;
+        };
+
         //when a table header is clicked, set the orderBy to the current column. then reverse the order by using "!""
         $scope.setTo = function(column){
             $scope.sortColumn = column;
@@ -43,7 +52,7 @@
         //need to store filtered assets to correct total items in pagination
         //this is so that the number of pages are correct
         $scope.$watch(function(){
-            $scope.filtered_assets = $scope.$eval("assets | filter: search");
+            $scope.filtered_assets = $scope.$eval("assets | filter: search | orderBy: sortColumn : reverse");
         });
 
         function getAllAssets(){

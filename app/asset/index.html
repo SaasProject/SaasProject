@@ -43,7 +43,7 @@
                             Add <span class="glyphicon glyphicon-plus"></span>
                         </button>
                         <label for="reportButton">Report: </label>                        
-                        <button type="reportButton" class="btn btn-success" ng-csv="filtered_assets" csv-header="columns" filename="{{setFilename()}}.csv">
+                        <button type="reportButton" class="btn btn-success" ng-csv="getFilteredAssets()" csv-header="columns" filename="{{setFilename()}}.csv">
                             Download <span class="glyphicon glyphicon-download-alt"></span>
                         </button>
                     </div>                           
@@ -74,7 +74,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="asset in filtered_assets | filter : search | orderBy: sortColumn : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
+                    <tr ng-repeat="asset in filtered_assets | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
                         <td ng-repeat="column in columns" ng-if="column != '_id'">{{$parent.asset[column]}}</td>
                         <td>
                             <button class="btn btn-primary glyphicon glyphicon-pencil" ng-click="editModal(asset)" data-toggle="modal" data-target="#myModal"></button>
