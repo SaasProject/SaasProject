@@ -54,16 +54,16 @@
             <table class="table table-hover">
                 <thead>
                     <tr> 
-                        <th ng-repeat="column in columns">{{column | uppercase}}</th>        
+                        <th ng-repeat="column in columns" ng-click='setTo(column)'>{{column | uppercase}}</th>        
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="asset in assets | filter : search | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
+                    <tr ng-repeat="asset in assets | filter : search | orderBy: sortColumn : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
                         <td ng-repeat="column in columns">{{$parent.asset[column]}}</td>
                     </tr>
                 </tbody>
             </table>
-            <ul uib-pagination total-items="assets.length" ng-model="currentPage" items-per-page="pageSize" boundary-links="true" max-size="2" force-ellipses="true"></ul>
+            <ul uib-pagination total-items="assets.length" ng-model="currentPage" items-per-page="pageSize" boundary-links="true" max-size="4" force-ellipses="true"></ul>
         </div>
     </div>
 </div>

@@ -27,9 +27,18 @@
         $scope.warehouses = [];
         $scope.currentPage = 1;
         $scope.pageSize = 12;
+        $scope.reverse = false;
+        $scope.sortColumn = "tag";
 
+        //when csv download is clicked, get the current date and format it using angular filter
         $scope.setFilename = function(){
             return "Report " + $filter('date')(new Date(), "yyyy-MM-dd h:mma");
+        };
+
+        //when a header is clicked, set the orderBy to the current column. then reverse the order by using "!""
+        $scope.setTo = function(column){
+            $scope.sortColumn = column;
+            $scope.reverse = !$scope.reverse;
         };
 
         function getAllAssets(){
@@ -53,6 +62,7 @@
             });
         }
 
+        //get all assets when controller is first loaded
         getAllAssets();
         
 
@@ -60,6 +70,7 @@
             console.log($scope.newAssets);
             AssetService.addAsset($scope.newAssets)
                     .then(function () {
+                        //get all assets to refresh the table
                         getAllAssets();
                         FlashService.Success('Asset Added');
                     })
