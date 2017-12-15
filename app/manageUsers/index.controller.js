@@ -183,22 +183,20 @@
 			
 			 var toDel = filterIndexById($scope.allUsers, index);
         
-			
-			console.log(toDel);
 
-            // if (confirm("Are you sure to delete this user?")){
+            if (confirm("Are you sure to delete this user?")){
 				
-             // UserService.Delete(toDel._id)
-                 // .then(function () {
+             UserService.Delete(toDel._id)
+                 .then(function () {
 					
-					// FlashService.Success('User Deleted');
-					// initController();
+					FlashService.Success('User Deleted');
+					initController();
 					 
-                // })
-                // .catch(function (error) {
-                    // FlashService.Error(error);
-                // });
-            // }
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+            }
         }
     }
  
