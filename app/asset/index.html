@@ -66,12 +66,17 @@
             <table class="table table-hover">
                 <thead>
                     <tr> 
-                        <th ng-repeat="column in columns" ng-click='setTo(column)'>{{column | uppercase}}</th>        
+                        <th ng-repeat="column in columns" ng-click='setTo(column)'>{{column | uppercase}}</th> 
+                        <th>Options</th>       
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="asset in filtered_assets | filter : search | orderBy: sortColumn : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
                         <td ng-repeat="column in columns">{{$parent.asset[column]}}</td>
+                        <td>
+                            <button class="btn btn-primary">Edit</button>
+                            <button class="btn btn-danger">Delete</button>                            
+                        </td>
                     </tr>
                 </tbody>
             </table>
