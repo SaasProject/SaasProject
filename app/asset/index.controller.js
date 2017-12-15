@@ -26,9 +26,10 @@
         $scope.assets = [];
         $scope.warehouses = [];
         $scope.currentPage = 1;
-        $scope.pageSize = 12;
+        $scope.pageSize = 5;
         $scope.reverse = false;
         $scope.sortColumn = "tag";
+        $scope.type = "add";
 
         //when csv download is clicked, get the current date and format it using angular filter
         $scope.setFilename = function(){
@@ -72,23 +73,53 @@
         getAllAssets();
         
 
-        $scope.addAsset = function(){
-            console.log($scope.newAssets);
-            AssetService.addAsset($scope.newAssets)
-                    .then(function () {
-                        //get all assets to refresh the table
-                        getAllAssets();
-                        FlashService.Success('Asset Added');
-                    })
-                    .catch(function (error) {
-                        if(error.code == 11000){
-                            FlashService.Error('Tag already exists');                            
-                        }
-                        else{
-                            FlashService.Error(error.errmsg);
-                        }
-                    });
-        }
+        $scope.addOrUpdateAsset = function(){
+            if($scope.type == "add"){
+                AssetService.addAsset($scope.newAsset).then(function(){
+                    //get all assets to refresh the table
+                    FlashService.Success('Asset Added');
+                })
+                .catch(function (error) {
+                    if(error.code == 11000){
+                        FlashService.Error('Tag already exists');                            
+                    }
+                    else{
+                        FlashService.Error(error);
+                    }
+                });
+            }
+            else{
+                AssetService.updateAsset($scope.newAsset).then(function(){
+                    FlashService.Success('Asset Updated');
+                })
+                .catch(function(error){
+                    if(error.code == 11000){
+                        FlashService.Error('Tag already exists');
+                    }
+                    else{
+                        FlashService.Error(error);
+                    }
+                });
+            }
+
+            getAllAssets();
+            $scope.resetModal();
+        };
+
+        $scope.editModal = function(asset){
+            $scope.type = "edit";
+            $scope.newAsset = $scope.assets[$scope.assets.indexOf(asset)];
+        };
+
+        $scope.resetModal = function(){
+            $scope.type = "add";
+            $scope.newAsset = {
+                tag: '',
+                name: '',
+                warehouse: '',
+                status: ''
+            };
+        };
 		
 		
 		//deleteAsset function

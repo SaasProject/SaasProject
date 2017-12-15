@@ -7,6 +7,7 @@ var service = {};
 
 service.getAll = getAll;
 service.addAsset = addAsset;
+service.updateAsset = updateAsset;
 service.delete = _delete;
 
 module.exports = service;
@@ -14,7 +15,7 @@ module.exports = service;
 function getAll(){
     var deferred = Q.defer();
 
-    Asset.find({}, {_id: false, __v: false}, function(err, assets){
+    Asset.find({}, {__v: false}, function(err, assets){
         //console.log('assets.service');
         //standard error
         if(err) deferred.reject(err);
@@ -48,6 +49,27 @@ function addAsset(assetParam){
     return deferred.promise;
 }
 
+function updateAsset(_id, assetParam){
+    
+        var deferred = Q.defer();
+    
+        var set = {
+            tag: assetParam.tag,
+            name: assetParam.name,
+            warehouse: assetParam.warehouse,
+            status: assetParam.status
+        }
+    
+        Asset.update({_id : _id}, {$set: set}, function(err){
+            if(err) {
+               deferred.reject(err);
+               console.log(err);
+            }
+            deferred.resolve();
+        });
+    
+        return deferred.promise;
+    }
 
 function _delete(tag) {
     var deferred = Q.defer();

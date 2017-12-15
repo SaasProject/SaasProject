@@ -1,79 +1,36 @@
 <h2>Assets</h2>
 <div class="flash-message" ng-if="flash">
-    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+    <div class="{{'alert alert-dismissable alert-' + flash.type}}">
+        <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a> 
+        {{flash.message}}
+    </div>
 </div>
 <div class="container">
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
+                
+            <!-- Modal content-->
+            <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add Asset</h4>
+                <h4 class="modal-title">{{type == 'add' ? 'Add Asset' : 'Update Asset'}}</h4>
             </div>
             <div class="modal-body">
-              <form>
-                <label for="asset_id">Tag: </label>
-                <input id="asset_id" type="text" ng-model="newAssets.tag" class="form-control" required><br>
-                <label for="name">Name: </label>
-                <input id="name" type="text" ng-model="newAssets.name" class="form-control" required><br>
-                <label for="warehouse">Warehouse </label>
-                <input id="warehouse" type="text" ng-model="newAssets.warehouse" class="form-control" required><br>
-                <label for="status">status: </label>
-                <input id="status" type="text" ng-model="newAssets.status" class="form-control" required><br>
-
-                <button class="btn btn-primary" ng-click="addAsset()" data-dismiss="modal">Save</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-              </form>
+                <form>
+                    <label for="asset_id">Tag: </label>
+                    <input id="asset_id" type="text" ng-model="newAsset.tag" class="form-control" required><br>
+                    <label for="name">Name: </label>
+                    <input id="name" type="text" ng-model="newAsset.name" class="form-control" required><br>
+                    <label for="warehouse">Warehouse </label>
+                    <input id="warehouse" type="text" ng-model="newAsset.warehouse" class="form-control" required><br>
+                    <label for="status">status: </label>
+                    <input id="status" type="text" ng-model="newAsset.status" class="form-control" required><br>
+                    <button class="btn btn-primary" ng-click="addOrUpdateAsset()" data-dismiss="modal">{{type == 'add' ? 'Add' : 'Update'}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="resetModal()">Close</button>
+                </form>
             </div>
-          </div>
+            </div>
         </div>
     </div>
-	
-	   <!-- Modal for Edit User -->
-  <div class="modal fade" id="editModal" role="dialog">
-		<div class="modal-dialog">
-		
-			<!-- Modal content-->
-			<div class="modal-content">
-			
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Update Asset</h4>
-				</div>
-        
-				<div class="modal-body">
-					<form>
-					
-						<div class="form-group">
-							<label for="tag">Tag</label>
-							<input type="text" class="form-control" id="tag" ng-model = "newAssets.tag" >
-						</div>
-           
-						<div class="form-group">
-							<label for="namae">Name</label>
-							<input	 type="text" class="form-control" id="namae" ng-model = "newAssets.name">
-						</div>
-						
-						<div class="form-group">
-							<label for="whouse">Warehouse</label>
-							<input type="text" class="form-control" id="whouse" ng-model = "newAssets.warehouse">
-						</div>
-						
-						<div class="form-group">
-							<label for="stat">Status</label>
-							<input	 type="text" class="form-control" id="stat" ng-model = "newAssets.status">
-						</div>
-						
-						
-						<button class = "btn btn-primary" ng-click = "" data-dismiss = "modal">Save</button>
-						<button class= "btn btn-danger" data-dismiss="modal">Cancel</button>
-					</form>
-				</div>
-			</div>
-      
-		</div>
-  </div>
   
     <div class="row">
         <div class="col-sm-6">
@@ -82,14 +39,14 @@
                 <div class="panel-body">
                     <div class="form-inline">
                         <label for="addButton">Add New: </label>     
-                        <button type="addButton" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                        <button type="addButton" class="btn btn-info" ng-click="resetModal()" data-toggle="modal" data-target="#myModal">
                             Add <span class="glyphicon glyphicon-plus"></span>
                         </button>
                         <label for="reportButton">Report: </label>                        
                         <button type="reportButton" class="btn btn-success" ng-csv="filtered_assets" csv-header="columns" filename="{{setFilename()}}.csv">
                             Download <span class="glyphicon glyphicon-download-alt"></span>
                         </button>
-                    </div>                            
+                    </div>                           
                 </div>
             </div>
         </div>
@@ -112,16 +69,16 @@
             <table class="table table-hover">
                 <thead>
                     <tr> 
-                        <th ng-repeat="column in columns" ng-click='setTo(column)'>{{column | uppercase}}</th> 
+                        <th ng-repeat="column in columns" ng-click='setTo(column)' ng-if="column != '_id'">{{column | uppercase}}</th> 
                         <th>Options</th>       
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="asset in filtered_assets | filter : search | orderBy: sortColumn : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
-                        <td ng-repeat="column in columns">{{$parent.asset[column]}}</td>
+                        <td ng-repeat="column in columns" ng-if="column != '_id'">{{$parent.asset[column]}}</td>
                         <td>
-                            <button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle = "modal" data-target = "#editModal" ng-click = "editAsset(asset._id)"></button>
-                            <button class="btn btn-danger glyphicon glyphicon-remove" ng-click = "deleteAsset($index)"></button>                            
+                            <button class="btn btn-primary glyphicon glyphicon-pencil" ng-click="editModal(asset)" data-toggle="modal" data-target="#myModal"></button>
+                            <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="deleteAsset(asset)"></button>                            
                         </td>
                     </tr>
                 </tbody>
