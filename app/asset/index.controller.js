@@ -47,10 +47,6 @@
                 if(assets.length > 0){               
                     //store to array
                     $scope.assets = assets;
-
-                    //get the fields of assets. since it is assumed that schema is fixed, you can get fields on any object
-                    //keys = fields
-                    $scope.columns = Object.keys($scope.assets[0]);
                 }
                 else{
                     //perform notification here
@@ -64,6 +60,10 @@
 
         //get all assets when controller is first loaded
         getAllAssets();
+        
+        //get the fields of assets. since it is assumed that schema is fixed, you can get fields on any object
+        //keys = fields
+        $scope.columns = Object.keys($scope.assets[0]);
         
 
         $scope.addAsset = function(){
