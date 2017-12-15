@@ -60,7 +60,7 @@ function updateAsset(_id, assetParam){
             status: assetParam.status
         }
     
-        Asset.update({_id : _id}, {$set: set}, function(err){
+        Asset.update({_id : _id}, {$set: set}, {runValidators: true}, function(err){
             if(err) {
                deferred.reject(err);
                console.log(err);

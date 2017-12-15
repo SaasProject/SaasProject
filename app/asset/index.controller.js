@@ -11,8 +11,6 @@
                 return data.slice(start);
             };
         });
-
-
  
     function Controller($window, AssetService, FlashService, $scope, $interval, $filter) {
  
@@ -83,6 +81,9 @@
                     if(error.code == 11000){
                         FlashService.Error('Tag already exists');                            
                     }
+                    else if(error.name == 'ValidationError'){
+                        FlashService.Error(error.message);
+                    }
                     else{
                         FlashService.Error(error);
                     }
@@ -95,6 +96,9 @@
                 .catch(function(error){
                     if(error.code == 11000){
                         FlashService.Error('Tag already exists');
+                    }
+                    else if(error.name == 'ValidationError'){
+                        FlashService.Error(error.message);
                     }
                     else{
                         FlashService.Error(error);
@@ -124,21 +128,14 @@
 		
 		//deleteAsset function
 		$scope.deleteAsset = function(index) {
-			
-			
-			 var toDel = $scope.assets[index];
+			var toDel = $scope.assets[index];
 			 
-			 console.log(toDel.tag);
+			console.log(toDel.tag);
         
-
             if (confirm("Are you sure to delete this user?")){
-				
-             AssetService.Delete(toDel.tag)
-                 .then(function () {
-					
+				AssetService.Delete(toDel.tag).then(function () {
 					FlashService.Success('Asset Deleted');
 					getAllAssets();
-					 
                 })
                 .catch(function (error) {
                     FlashService.Error(error);

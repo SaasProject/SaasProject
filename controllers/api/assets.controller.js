@@ -38,7 +38,7 @@ function updateAsset(req, res){
     assetService.updateAsset(req.params._id, req.body).then(function(){
         res.sendStatus(200);
     }).catch(function(err){
-        res.sendStatus(400).send(err);
+        res.status(400).send(err);
     });
 }
 
