@@ -30,20 +30,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <div class="panel panel-success">
-                <div class="panel-heading">Settings</div>
+                <div class="panel-heading">Asset</div>
                 <div class="panel-body">
                     <div class="form-inline">
-                        <label for="addButton">Add New Asset: </label>     
+                        <label for="addButton">Add New: </label>     
                         <button type="addButton" class="btn btn-info" data-toggle="modal" data-target="#myModal">
                             Add <span class="glyphicon glyphicon-plus"></span>
                         </button>
-                        <label for="search">Search: </label>
-                        <input id="search" type="text" ng-model="search" class="form-control">     
-                        <label for="pageSize">Items per page: </label>
-                        <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{assets.length}}>                     
-                        <label for="reportButton">Generate Report: </label>                        
+                        <label for="reportButton">Report: </label>                        
                         <button type="reportButton" class="btn btn-success" ng-csv="assets | filter: search" csv-header="columns" filename="{{setFilename()}}.csv">
                             Download <span class="glyphicon glyphicon-download-alt"></span>
                         </button>
@@ -51,6 +47,19 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Settings</div>
+                    <div class="panel-body">
+                        <div class="form-inline">
+                            <label for="search">Search: </label>
+                            <input id="search" type="text" ng-model="search" class="form-control">     
+                            <label for="pageSize">Items per page: </label>
+                            <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{assets.length}}>                     
+                        </div>                            
+                    </div>
+                </div>
+            </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
