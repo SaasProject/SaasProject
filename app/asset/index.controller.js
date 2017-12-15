@@ -88,6 +88,31 @@
                             FlashService.Error(error.errmsg);
                         }
                     });
-                }
-        };
+        }
+		
+		
+		//deleteAsset function
+		$scope.deleteAsset = function(index) {
+			
+			
+			 var toDel = $scope.assets[index];
+			 
+			 console.log(toDel.tag);
+        
+
+            if (confirm("Are you sure to delete this user?")){
+				
+             AssetService.Delete(toDel.tag)
+                 .then(function () {
+					
+					FlashService.Success('Asset Deleted');
+					getAllAssets();
+					 
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+            }
+        }
+    };
 })();

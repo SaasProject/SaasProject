@@ -9,7 +9,7 @@
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add User</h4>
+                <h4 class="modal-title">Add Asset</h4>
             </div>
             <div class="modal-body">
               <form>
@@ -29,6 +29,52 @@
           </div>
         </div>
     </div>
+	
+	   <!-- Modal for Edit User -->
+  <div class="modal fade" id="editModal" role="dialog">
+		<div class="modal-dialog">
+		
+			<!-- Modal content-->
+			<div class="modal-content">
+			
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Update Asset</h4>
+				</div>
+        
+				<div class="modal-body">
+					<form>
+					
+						<div class="form-group">
+							<label for="tag">Tag</label>
+							<input type="text" class="form-control" id="tag" ng-model = "newAssets.tag" >
+						</div>
+           
+						<div class="form-group">
+							<label for="namae">Name</label>
+							<input	 type="text" class="form-control" id="namae" ng-model = "newAssets.name">
+						</div>
+						
+						<div class="form-group">
+							<label for="whouse">Warehouse</label>
+							<input type="text" class="form-control" id="whouse" ng-model = "newAssets.warehouse">
+						</div>
+						
+						<div class="form-group">
+							<label for="stat">Status</label>
+							<input	 type="text" class="form-control" id="stat" ng-model = "newAssets.status">
+						</div>
+						
+						
+						<button class = "btn btn-primary" ng-click = "" data-dismiss = "modal">Save</button>
+						<button class= "btn btn-danger" data-dismiss="modal">Cancel</button>
+					</form>
+				</div>
+			</div>
+      
+		</div>
+  </div>
+  
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-success">
@@ -74,8 +120,8 @@
                     <tr ng-repeat="asset in filtered_assets | filter : search | orderBy: sortColumn : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
                         <td ng-repeat="column in columns">{{$parent.asset[column]}}</td>
                         <td>
-                            <button class="btn btn-primary glyphicon glyphicon-pencil"></button>
-                            <button class="btn btn-danger glyphicon glyphicon-remove"></button>                            
+                            <button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle = "modal" data-target = "#editModal" ng-click = "editAsset(asset._id)"></button>
+                            <button class="btn btn-danger glyphicon glyphicon-remove" ng-click = "deleteAsset($index)"></button>                            
                         </td>
                     </tr>
                 </tbody>
