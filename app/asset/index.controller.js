@@ -26,7 +26,7 @@
         $scope.assets = [];
         $scope.warehouses = [];
         $scope.currentPage = 1;
-        $scope.pageSize = 10;
+        $scope.pageSize = 12;
 
         $scope.setFilename = function(){
             return "Report " + $filter('date')(new Date(), "yyyy-MM-dd h:mma");
