@@ -42,12 +42,9 @@
             return size;
         };
 
-        // initialize pages
+        // initialize pages of user list
         $scope.currentPage = 1;
         $scope.pageSize = 10;
-
-        // make user list index independent in each page
-        $scope.number = ($scope.$index + 1) + ($scope.currentPage - 1) * $scope.pageSize;
         
         // Scope for users data
         $scope.aUsers = {
