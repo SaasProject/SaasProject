@@ -149,6 +149,10 @@
             $scope.aUsers = filterIndexById($scope.allUsers, index);
         };
 		
+		vm.cancelEdit = function() {
+			initController();
+		}
+		
 		
 		vm.updateUser = function() {
 			
