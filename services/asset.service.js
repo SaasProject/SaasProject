@@ -13,7 +13,7 @@ module.exports = service;
 function getAll(){
     var deferred = Q.defer();
 
-    Asset.find({}, {_id: false}, function(err, assets){
+    Asset.find({}, {_id: false, __v: false}, function(err, assets){
         //console.log('assets.service');
         //standard error
         if(err) deferred.reject(err);

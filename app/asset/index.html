@@ -40,7 +40,7 @@
                             Add <span class="glyphicon glyphicon-plus"></span>
                         </button>
                         <label for="reportButton">Report: </label>                        
-                        <button type="reportButton" class="btn btn-success" ng-csv="assets | filter: search" csv-header="columns" filename="{{setFilename()}}.csv">
+                        <button type="reportButton" class="btn btn-success" ng-csv="filtered_assets" csv-header="columns" filename="{{setFilename()}}.csv">
                             Download <span class="glyphicon glyphicon-download-alt"></span>
                         </button>
                     </div>                            
@@ -55,7 +55,7 @@
                             <label for="search">Search: </label>
                             <input id="search" type="text" ng-model="search" class="form-control">     
                             <label for="pageSize">Items per page: </label>
-                            <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{assets.length}}>                     
+                            <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{filtered_assets.length}}>                     
                         </div>                            
                     </div>
                 </div>
