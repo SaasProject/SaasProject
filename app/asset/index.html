@@ -78,7 +78,7 @@
                         <td ng-repeat="column in columns" ng-if="column != '_id'">{{$parent.asset[column]}}</td>
                         <td>
                             <button class="btn btn-primary glyphicon glyphicon-pencil" ng-click="editModal(asset)" data-toggle="modal" data-target="#myModal"></button>
-                            <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="deleteAsset(asset)"></button>                            
+                            <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="deleteAsset($index)"></button>                            
                         </td>
                     </tr>
                 </tbody>
