@@ -34,11 +34,25 @@
             return "Report " + $filter('date')(new Date(), "yyyy-MM-dd h:mma");
         };
 
+        //when csv download is clicked, delete _id in each asset
         $scope.getFilteredAssets = function(){
             var temp = [];
-            temp = $scope.filtered_assets;
+            angular.copy($scope.filtered_assets, temp);            
             angular.forEach(temp, function(value, key){
                 delete value["_id"];
+            });
+            return temp;
+        };
+
+        //when csv download is clicked, copy columns to a variable then delete the variable's _id
+        //$scope.columns should not be directly used since it affects value and key pairs in CRUD
+        //since fields in db and in existing code are lowercase, only convert them to uppercase during download
+        $scope.getColumns = function(){
+            var temp = [];
+            //omit _id (0)
+            angular.copy($scope.columns.slice(1), temp);
+            angular.forEach(temp, function(value, key){
+                temp[key] = $filter('uppercase')(value);
             });
             return temp;
         };
@@ -116,12 +130,13 @@
             }
 
             getAllAssets();
-            $scope.resetModal();
         };
 
         $scope.editModal = function(asset){
             $scope.type = "edit";
-            $scope.newAsset = $scope.assets[$scope.assets.indexOf(asset)];
+
+            //copy instead of assigning to new asset to avoid binding (changes text as you type)
+            angular.copy($scope.assets[$scope.assets.indexOf(asset)], $scope.newAsset);
         };
 
         $scope.resetModal = function(){

@@ -25,7 +25,7 @@
                     <label for="status">status: </label>
                     <input id="status" type="text" ng-model="newAsset.status" class="form-control" required><br>
                     <button class="btn btn-primary" ng-click="addOrUpdateAsset()" data-dismiss="modal">{{type == 'add' ? 'Add' : 'Update'}}</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="resetModal()">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </form>
             </div>
             </div>
@@ -43,7 +43,7 @@
                             Add <span class="glyphicon glyphicon-plus"></span>
                         </button>
                         <label for="reportButton">Report: </label>                        
-                        <button type="reportButton" class="btn btn-success" ng-csv="getFilteredAssets()" csv-header="columns" filename="{{setFilename()}}.csv">
+                        <button type="reportButton" class="btn btn-success" ng-csv="getFilteredAssets()" csv-header="getColumns()" filename="{{setFilename()}}.csv">
                             Download <span class="glyphicon glyphicon-download-alt"></span>
                         </button>
                     </div>                           
@@ -70,7 +70,7 @@
                 <thead>
                     <tr> 
                         <th ng-repeat="column in columns" ng-click='setTo(column)' ng-if="column != '_id'">{{column | uppercase}}</th> 
-                        <th>Options</th>       
+                        <th>OPTIONS</th>       
                     </tr>
                 </thead>
                 <tbody>
