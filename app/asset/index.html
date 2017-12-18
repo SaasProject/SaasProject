@@ -69,7 +69,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr> 
-                        <th ng-repeat="column in columns" ng-click='setTo(column)' ng-if="column != '_id'">{{column | uppercase}}</th> 
+                        <th ng-repeat="column in columns" ng-click='setTo(column)' ng-if="column != '_id'" ng-class='sortClass(column)'>{{column | uppercase}}</th> 
                         <th>OPTIONS</th>       
                     </tr>
                 </thead>

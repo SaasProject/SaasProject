@@ -57,11 +57,31 @@
             return temp;
         };
 
-        //when a table header is clicked, set the orderBy to the current column. then reverse the order by using "!""
+        //Edited by Glenn when a table header is clicked, set the orderBy to the current column. then reverse the order by using "!""
         $scope.setTo = function(column){
             $scope.sortColumn = column;
-            $scope.reverse = !$scope.reverse;
+            //$scope.reverse = !$scope.reverse;
+            if($scope.reverse){
+                $scope.reverse = false;
+                $scope.reverseclass = 'arrow-up';
+            }else{
+                $scope.reverse = true;
+                $scope.reverseclass = 'arrow-down';
+            }
         };
+
+        //added by Glenn Add Arrow sort in table column
+        $scope.sortClass = function(column){
+            if($scope.sortColumn == column){
+                if($scope.reverse){
+                    return 'arrow-down'; 
+                }else{
+                    return 'arrow-up';
+                }
+            }else{
+                return '';
+            }
+        } 
 
         //need to store filtered assets to correct total items in pagination
         //this is so that the number of pages are correct
