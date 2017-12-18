@@ -57,17 +57,13 @@
             return temp;
         };
 
-        //Edited by Glenn when a table header is clicked, set the orderBy to the current column. then reverse the order by using "!""
+        //edited by jeremy
+        //removed $scope.reverseClass as i dont see any use for it
         $scope.setTo = function(column){
-            $scope.sortColumn = column;
-            //$scope.reverse = !$scope.reverse;
-            if($scope.reverse){
-                $scope.reverse = false;
-                $scope.reverseclass = 'arrow-up';
-            }else{
-                $scope.reverse = true;
-                $scope.reverseclass = 'arrow-down';
-            }
+
+            //when switching columns, sort in ascending order.
+            $scope.reverse = (column != $scope.sortColumn) ? false : !$scope.reverse;
+            $scope.sortColumn = column;  
         };
 
         //added by Glenn Add Arrow sort in table column
