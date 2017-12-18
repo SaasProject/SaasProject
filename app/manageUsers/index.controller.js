@@ -150,6 +150,14 @@
         };
 		
 		vm.cancelEdit = function() {
+			$scope.aUsers = {
+            role: '',
+            firstName: '',
+            lastName: '',
+            username: '',
+            email: ''
+            };
+			
 			initController();
 		}
 		
