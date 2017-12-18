@@ -1,6 +1,6 @@
 <h2>Assets</h2>
-<div class="flash-message" ng-if="flash">
-    <div class="{{'alert alert-' + flash.type}}" ng-show="flash.show">
+<div class="flash-message" ng-if="flash.show">
+    <div class="{{'alert alert-' + flash.type}}">
         {{flash.message}}
         <a href="" ng-click="flash.show = !flash.show"><span class="glyphicon glyphicon-remove pull-right"></span></a> 
     </div>
