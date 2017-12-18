@@ -1,11 +1,10 @@
-<h2>Assets</h2>
 <div class="flash-message" ng-if="flash.show">
     <div class="{{'alert alert-' + flash.type}}">
         {{flash.message}}
         <a href="" ng-click="flash.show = !flash.show"><span class="glyphicon glyphicon-remove pull-right"></span></a> 
     </div>
 </div>
-<div class="container">
+<div>
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
                 
@@ -83,7 +82,7 @@
                     </tr>
                 </tbody>
             </table>
-            <ul uib-pagination total-items="filtered_assets.length" ng-model="currentPage" items-per-page="pageSize" boundary-links="true" max-size="4" force-ellipses="true"></ul>
+            <ul uib-pagination total-items="filtered_assets.length" ng-model="currentPage" items-per-page="pageSize" boundary-links="true" max-size="3" force-ellipses="true"></ul>
         </div>
     </div>
 </div>
