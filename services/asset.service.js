@@ -71,13 +71,11 @@ function updateAsset(_id, assetParam){
         return deferred.promise;
     }
 
-function _delete(tag) {
+function _delete(_id) {
     var deferred = Q.defer();
-	
-	console.log(tag);
  
      Asset.remove(
-        { tag },
+        { _id },
         function (err) {
             if (err) deferred.reject(err);
  

@@ -136,13 +136,13 @@
 		
 		
 		//deleteAsset function
-		$scope.deleteAsset = function(index) {
-			var toDel = $scope.assets[index];
+		$scope.deleteAsset = function(asset) {
+			var toDel = $scope.assets[$scope.assets.indexOf(asset)];
 			 
-			console.log(toDel.tag);
+		//	console.log(toDel);
         
             if (confirm("Are you sure to delete this user?")){
-				AssetService.Delete(toDel.tag).then(function () {
+				AssetService.Delete(toDel._id).then(function () {
 					FlashService.Success('Asset Deleted');
 					getAllAssets();
                 })

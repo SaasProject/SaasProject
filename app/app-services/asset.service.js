@@ -27,8 +27,8 @@
             return $http.put('/api/assets/' + asset._id, asset).then(handleSuccess, handleError);
         }
 		
-		function Delete(tag) {
-            return $http.delete('/api/assets/' + tag).then(handleSuccess, handleError);
+		function Delete(_id) {
+            return $http.delete('/api/assets/' + _id).then(handleSuccess, handleError);
         }
   
         // private functions
