@@ -14,10 +14,10 @@ router.get('/', function (req, res) {
     
     
     if(req.query.expired){
-        res.render('login', {error: 'Your session has expired'});
+        return res.render('login', {error: 'Your session has expired'});
     }
     else{
-        res.render('login', viewData);
+        return res.render('login', viewData);
     }
 });
  
