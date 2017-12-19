@@ -32,18 +32,16 @@
     </div>
   
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="panel panel-success">
                 <div class="panel-heading">Asset</div>
                 <div class="panel-body">
-                    <div class="form-inline">
-                        <label for="addButton">Add New: </label>     
+                    <div class="form-inline">    
                         <button type="addButton" class="btn btn-info" ng-click="resetModal()" data-toggle="modal" data-target="#myModal">
-                            Add <span class="glyphicon glyphicon-plus"></span>
+                            Add New <span class="glyphicon glyphicon-plus"></span>
                         </button>
-                        <label for="reportButton">Report: </label>                        
                         <button type="reportButton" class="btn btn-success" ng-csv="getFilteredAssets()" csv-header="getColumns()" filename="{{setFilename()}}.csv">
-                            Download <span class="glyphicon glyphicon-download-alt"></span>
+                            Generate Report <span class="glyphicon glyphicon-download-alt"></span>
                         </button>
                     </div>                           
                 </div>
@@ -68,8 +66,8 @@
             <table class="table table-hover">
                 <thead>
                     <tr> 
-                        <th ng-repeat="column in columns" ng-click='setTo(column)' ng-if="column != '_id'" ng-class='sortClass(column)'>{{column | uppercase}}</th> 
-                        <th>OPTIONS</th>       
+                        <th ng-repeat="column in columns" ng-click='setTo(column)' ng-if="column != '_id'" ng-class="setWidth(column) + ' ' + sortClass(column)">{{column | uppercase}}</th> 
+                        <th class="col-sm-2">OPTIONS</th>       
                     </tr>
                 </thead>
                 <tbody>

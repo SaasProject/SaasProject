@@ -31,7 +31,7 @@
 
         //when csv download is clicked, get the current date and format it using angular filter
         $scope.setFilename = function(){
-            return "Report " + $filter('date')(new Date(), "yyyy-MM-dd h:mma");
+            return "Asset Report " + $filter('date')(new Date(), "yyyy-MM-dd h:mma");
         };
 
         //when csv download is clicked, delete _id in each asset
@@ -77,7 +77,19 @@
             }else{
                 return '';
             }
-        } 
+        }; 
+
+        //added by jeremy to set the width of each column
+        //arbitrary only
+        $scope.setWidth = function(column){
+            switch(column){
+                case "tag": return 'col-sm-2'; break;
+                case "name": return 'col-sm-3'; break;
+                case "warehouse": return 'col-sm-3'; break;
+                case "status": return 'col-sm-2'; break;
+                default: return '';
+            }
+        };
 
         //need to store filtered assets to correct total items in pagination
         //this is so that the number of pages are correct
@@ -156,7 +168,7 @@
 			 
 		//	console.log(toDel);
         
-            if (confirm("Are you sure to delete this item?")){
+            if (confirm("Are you sure to delete this user?")){
 				AssetService.Delete(toDel._id).then(function () {
 					FlashService.Success('Asset Deleted');
 					getAllAssets();
