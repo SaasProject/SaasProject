@@ -15,17 +15,17 @@ service.getAll = getAll;
 service.authenticate = authenticate;
 service.emailOn = emailOn;      // added by dyan0
 service.getById = getById;
-service.create = create;
+//service.create = create;
 service.insert = insert;    // macku
 service.update = update;
 service.delete = _delete;
  
 module.exports = service;
  
-function authenticate(username, password) {
+function authenticate(email, password) {
     var deferred = Q.defer();
  
-    db.users.findOne({ username: username }, function (err, user) {
+    db.users.findOne({ email: email }, function (err, user) {
         if (err) deferred.reject(err);
  
         if (user && bcrypt.compareSync(password, user.hash)) {
@@ -112,13 +112,13 @@ function getAll() {
 function insert(userParam){
     var deferred = Q.defer();
     db.users.findOne(
-        { username: userParam.username },
+        { email: userParam.email },
         function (err, user) {
             if (err) deferred.reject(err);
  
             if (user) {
-                // username already exists
-                deferred.reject('Username "' + userParam.username + '" is already taken');
+                // email already exists
+                deferred.reject('Email "' + userParam.email + '" is already taken');
             } else {
                 insertUser();
             }
@@ -145,7 +145,7 @@ function insert(userParam){
     return deferred.promise;
 }
  
-function create(userParam) {
+/*function create(userParam) {
     var deferred = Q.defer();
  
     // validation
@@ -179,7 +179,7 @@ function create(userParam) {
     }
  
     return deferred.promise;
-}
+}*/
  
 function update(_id, userParam) {
     var deferred = Q.defer();

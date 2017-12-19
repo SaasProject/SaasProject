@@ -32,7 +32,7 @@ function getAllUsers(req, res) {
 }
  
 function authenticateUser(req, res) {
-    userService.authenticate(req.body.username, req.body.password)
+    userService.authenticate(req.body.email, req.body.password)
         .then(function (token) {
             if (token) {
                 // authentication successful
