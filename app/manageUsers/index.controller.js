@@ -113,13 +113,19 @@
         }
 
         // added adduser function
-        $scope.addUser = function(){
-            if($scope.aUsers.role.length===0 
+        $scope.addUser = function(isValid){
+			if(!isValid) {
+				
+				FlashService.Error('Please input a valid email');
+				$scope.aUsers = {role: '',firstName: '',lastName: '',email: ''};
+				
+			} else if($scope.aUsers.role.length===0 
                 || $scope.aUsers.firstName.length===0 
-                || $scope.aUsers.lastName.length===0  
-                || $scope.aUsers.username.length===0  
+                || $scope.aUsers.lastName.length===0   
                 || $scope.aUsers.email.length===0 ){
                 FlashService.Error('Please Fill up all the textfields');
+				$scope.aUsers = {role: '',firstName: '',lastName: '',email: ''};
+
             }else{
                 var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
                 for (var i = 0; i < 10; i++){
@@ -128,7 +134,9 @@
 
                 UserService.Insert($scope.aUsers)
                     .then(function () {
-                        FlashService.Success('User updated');
+						
+						initController();
+			            FlashService.Success('User Added');
                     })
                     .catch(function (error) {
                         FlashService.Error(error);
@@ -161,28 +169,32 @@
         };
 		
 		vm.cancelEdit = function() {
-			$scope.aUsers = {
-            role: '',
-            firstName: '',
-            lastName: '',
-            email: ''
-            };
 			
+			$scope.aUsers = {role: '',firstName: '',lastName: '',email: ''};			
 			initController();
 		}
 		
 		
-		vm.updateUser = function() {
+		vm.updateUser = function(isValid) {
 			
-			 if($scope.aUsers.role.length===0 
+			if (!isValid) {
+				
+				FlashService.Error('Please input a valid email');
+				$scope.aUsers = {role: '',firstName: '',lastName: '',email: ''};
+				
+			} else if($scope.aUsers.role.length===0 
                 || $scope.aUsers.firstName.length===0 
                 || $scope.aUsers.lastName.length===0   
                 || $scope.aUsers.email.length===0 ){
+					
 					FlashService.Error('Please Fill up all the textfields');
+					$scope.aUsers = {role: '',firstName: '',lastName: '',email: ''};
+					
 				} else {
-			          console.log($scope.aUsers);
+			        console.log($scope.aUsers);
 					UserService.Update($scope.aUsers)
 						.then(function () {
+							
 							$scope.aUsers = {role: '', firstName: '', lastName: '', email: ''};
 							FlashService.Success('User updated');
 							initController();
