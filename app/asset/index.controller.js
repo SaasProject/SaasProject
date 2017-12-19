@@ -156,7 +156,7 @@
 			 
 		//	console.log(toDel);
         
-            if (confirm("Are you sure to delete this user?")){
+            if (confirm("Are you sure to delete this item?")){
 				AssetService.Delete(toDel._id).then(function () {
 					FlashService.Success('Asset Deleted');
 					getAllAssets();
