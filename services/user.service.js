@@ -188,7 +188,6 @@ function update(_id, userParam) {
     db.users.findById(_id, function (err, user) {
         if (err) deferred.reject(err);
  
-            // username has changed so check if the new username is already taken
             db.users.findOne(
                 { email: userParam.email },
                 function (err, user) {
@@ -199,8 +198,6 @@ function update(_id, userParam) {
                     }else{
                         deferred.reject('Old password is incorrect');
                     }
- 
-                
                 });
     });
  
