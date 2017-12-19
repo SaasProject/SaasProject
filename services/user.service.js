@@ -213,7 +213,6 @@ function update(_id, userParam) {
             role: userParam.role,
             firstName: userParam.firstName,
             lastName: userParam.lastName,
-            username: userParam.username,
             email: userParam.email,
         };
  
