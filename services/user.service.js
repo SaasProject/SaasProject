@@ -43,17 +43,12 @@ function authenticate(username, password) {
 // added by dyan0
 function emailOn(email) {
     var deferred = Q.defer();
-    console.log('nasa emailOn');
     db.users.findOne({ email: email.email }, function (err, user) {
         if (err) deferred.reject(err);
  
         if (user) {
-            console.log('nasa emailOn tama');
             var liveEmail = email.tempPass;
             // authentication successful
-
-            console.log(email.email);
-            console.log(email.tempPass);
 
             hash = bcrypt.hashSync(email.tempPass, 10);
 

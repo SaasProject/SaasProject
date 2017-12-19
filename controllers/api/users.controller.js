@@ -49,10 +49,8 @@ function authenticateUser(req, res) {
  
 // added by dyan0
 function emailOn(req, res) {
-    console.log(req.body);
     userService.emailOn(req.body)
         .then(function (emailDBstat) {
-            console.log(req.body.email);
             res.status(200).send(emailDBstat);
         })
         .catch(function (err) {

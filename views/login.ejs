@@ -28,12 +28,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4>Forgot Password</h4>
+                <h4>Account Help</h4>
             </div>
             <form method="post">
             <div class="modal-body">
-                <h5>Email Address</h5>
-                <input type="email" required placeholder="type-in your account's email" name="email" id="email" value="<%= locals.email || '' %>" class="form-control"/>
+                <h5>Type-in your email address to recover your account</h5>
+                <input type="email" required placeholder="sample@email.com" name="email" id="email" value="<%= locals.email || '' %>" class="form-control" autofocus/>
             </div>
             <div class="modal-footer">
                 <input type="hidden" name="formType" value="forgotPass"/>

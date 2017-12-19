@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var config = require('config.json');
+var nodemailer = require('nodemailer');
  
 router.get('/', function (req, res) {
     // log user out
