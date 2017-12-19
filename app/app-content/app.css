@@ -6,7 +6,7 @@ body {
     margin-top: 20px;
 }
 
-.arrow-down:after,.arrow-up:after{
+.arrow-down:after,.arrow-up:after,.arrow-dormant:after{
  content: ' ';
  position: relative;
  left: 2px;
@@ -15,15 +15,20 @@ body {
 
 .arrow-down:after{
  top: 10px;
- border-top-color: gray;
+ border-top-color: black;
 }
 
 .arrow-up:after{
  bottom: 15px;
+ border-bottom-color: black;
+}
+
+.arrow-dormant:after{
+ bottom: 15px;
  border-bottom-color: gray;
 }
 
-.arrow-down,.arrow-up{
+.arrow-down,.arrow-up,.arrow-dormant{
  padding-right: 10px;
 }
 

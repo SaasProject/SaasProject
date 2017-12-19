@@ -85,7 +85,7 @@
                     return 'arrow-up';
                 }
             }else{
-                return '';
+                return 'arrow-dormant';
             }
         } 
         // End of Table Functions
