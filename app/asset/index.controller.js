@@ -75,7 +75,7 @@
                     return 'arrow-up';
                 }
             }else{
-                return '';
+                return 'arrow-dormant';
             }
         }; 
 
@@ -86,7 +86,7 @@
                 case "tag": return 'col-sm-2'; break;
                 case "name": return 'col-sm-3'; break;
                 case "warehouse": return 'col-sm-3'; break;
-                case "status": return 'col-sm-2'; break;
+                case "status": return 'col-sm-1'; break;
                 default: return '';
             }
         };
