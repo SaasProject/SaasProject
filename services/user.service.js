@@ -188,23 +188,20 @@ function update(_id, userParam) {
     db.users.findById(_id, function (err, user) {
         if (err) deferred.reject(err);
  
-        if (user.username !== userParam.username) {
             // username has changed so check if the new username is already taken
             db.users.findOne(
-                { username: userParam.username },
+                { email: userParam.email },
                 function (err, user) {
                     if (err) deferred.reject(err);
- 
-                    if (user) {
-                        // username already exists
-                        deferred.reject('Username "' + req.body.username + '" is already taken')
-                    } else {
+
+                    if (user && bcrypt.compareSync(userParam.oldPassword, user.hash)){
                         updateUser();
+                    }else{
+                        deferred.reject('Old password is incorrect');
                     }
+ 
+                
                 });
-        } else {
-            updateUser();
-        }
     });
  
     function updateUser() {
