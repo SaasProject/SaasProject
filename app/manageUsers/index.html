@@ -119,8 +119,7 @@
 				<th ng-click='sortColumn("role")' ng-class='sortClass("role")'>Role</th>
 				<th ng-click='sortColumn("firstName")' ng-class='sortClass("firstName")'>First Name</th>
 				<th ng-click='sortColumn("lastName")' ng-class='sortClass("lastName")'>Last Name</th>
-				<th ng-click='sortColumn("username")' ng-class='sortClass("username")'>Username</th>
-				<th ng-click='sortColumn("email")' ng-class='sortClass("email")'>Email</th>
+				<th ng-click='sortColumn("email")' ng-class='sortClass("email")'>Email Address</th>
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
 			</tr>
@@ -130,11 +129,10 @@
 				<td>{{u.role}}</td>
 				<td>{{u.firstName}}</td>
 				<td>{{u.lastName}}</td>
-				<td>{{u.username}}</td>
 				<td>{{u.email}}</td>
 				<td>
-					<button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle = "modal" data-target = "#editModal" ng-click="editUser(u._id)"></button>
-					<button class="btn btn-danger glyphicon glyphicon-remove" ng-click="vm.deleteUser(u._id)"></button>
+					<button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle = "modal" data-target = "#editModal" ng-click="editUser(u._id)" data-toggle="tooltip" title="Update"></button>
+					<button class="btn btn-danger glyphicon glyphicon-remove" ng-click="vm.deleteUser(u._id)" data-toggle="tooltip" title="Delete"></button>
 				</td>
 			</tr>
 		</tbody>

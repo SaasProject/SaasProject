@@ -100,9 +100,9 @@
                     //perform notification here
                     FlashService.Error("No assets found");
                 }
-            }, function(){
-                //perform notification here
-                FlashService.Error("An error occurred");
+            })
+            .catch(function(error){
+                errorFunction(error);
             });
         }
 
@@ -116,16 +116,8 @@
                     //get all assets to refresh the table
                     FlashService.Success('Asset Added');
                 })
-                .catch(function (error) {
-                    if(error.code == 11000){
-                        FlashService.Error('Tag already exists');                            
-                    }
-                    else if(error.name == 'ValidationError'){
-                        FlashService.Error(error.message);
-                    }
-                    else{
-                        FlashService.Error(error);
-                    }
+                .catch(function(error){
+                    errorFunction(error);
                 });
             }
             else{
@@ -133,15 +125,7 @@
                     FlashService.Success('Asset Updated');
                 })
                 .catch(function(error){
-                    if(error.code == 11000){
-                        FlashService.Error('Tag already exists');
-                    }
-                    else if(error.name == 'ValidationError'){
-                        FlashService.Error(error.message);
-                    }
-                    else{
-                        FlashService.Error(error);
-                    }
+                    errorFunction(error);
                 });
             }
 
@@ -172,14 +156,26 @@
 			 
 		//	console.log(toDel);
         
-            if (confirm("Are you sure to delete this user?")){
+            if (confirm("Are you sure to delete this item?")){
 				AssetService.Delete(toDel._id).then(function () {
 					FlashService.Success('Asset Deleted');
 					getAllAssets();
                 })
-                .catch(function (error) {
-                    FlashService.Error(error);
+                .catch(function(error){
+                    errorFunction(error);
                 });
+            }
+        }
+
+        function errorFunction(error){
+            if(error.code == 11000){
+                FlashService.Error('Tag already exists');
+            }
+            else if(error.name == 'ValidationError'){
+                FlashService.Error(error.message);
+            }
+            else{
+                FlashService.Error(error);
             }
         }
     };
