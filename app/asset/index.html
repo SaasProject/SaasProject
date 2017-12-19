@@ -72,7 +72,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="asset in filtered_assets | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
-                        <td ng-repeat="column in columns" ng-if="column != '_id'" class="setOverflow">{{$parent.asset[column]}}</td>
+                        <td ng-repeat="column in columns" ng-if="column != '_id'" class="cutOverflow">{{$parent.asset[column]}}</td>
                         <td>
                             <button class="btn btn-primary glyphicon glyphicon-pencil" ng-click="editModal(asset)" data-toggle="modal" data-target="#myModal"></button>
                             <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="deleteAsset(asset)"></button>                            

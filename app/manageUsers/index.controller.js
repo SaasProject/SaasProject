@@ -88,6 +88,18 @@
             }
         } 
         // End of Table Functions
+
+        //added by Glenn to set the width of each column
+        //arbitrary only
+        $scope.setWidth = function(column){
+            switch(column){
+                case "role": return 'col-sm-1'; break;
+                case "firstName": return 'col-sm-3'; break;
+                case "lastName": return 'col-sm-3'; break;
+                case "email": return 'col-sm-3'; break;
+                default: return '';
+            }
+        };
  
         initController();
  

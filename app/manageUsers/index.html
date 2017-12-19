@@ -112,20 +112,19 @@
 	<table class="table table-striped table-condensed table-hover">
 		<thread>
 			<tr>
-				<th ng-click='sortColumn("role")' ng-class='sortClass("role")'>Role</th>
-				<th ng-click='sortColumn("firstName")' ng-class='sortClass("firstName")'>First Name</th>
-				<th ng-click='sortColumn("lastName")' ng-class='sortClass("lastName")'>Last Name</th>
-				<th ng-click='sortColumn("email")' ng-class='sortClass("email")'>Email Address</th>
-				<th>&nbsp;</th>
-				<th>&nbsp;</th>
+				<th ng-click='sortColumn("role")' ng-class='setWidth("role") + " " + sortClass("role")'>Role</th>
+				<th ng-click='sortColumn("firstName")' ng-class='setWidth("firstName") + " " + sortClass("firstName")'>First Name</th>
+				<th ng-click='sortColumn("lastName")' ng-class='setWidth("lastName") + " " + sortClass("lastName")'>Last Name</th>
+				<th ng-click='sortColumn("email")' ng-class='setWidth("email") + " " + sortClass("email")'>Email Address</th>
+				<th>Options</th>
 			</tr>
 		</thread>
 		<tbody>
 			<tr ng-repeat="u in vm.user | orderObjectBy : column : reverse | filter : search | pagination: (currentPage - 1) * pageSize | limitTo: pageSize ">
-				<td>{{u.role}}</td>
-				<td>{{u.firstName}}</td>
-				<td>{{u.lastName}}</td>
-				<td>{{u.email}}</td>
+				<td class="cutOverflow">{{u.role}}</td>
+				<td class="cutOverflow">{{u.firstName}}</td>
+				<td class="cutOverflow">{{u.lastName}}</td>
+				<td class="cutOverflow">{{u.email}}</td>
 				<td>
 					<button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle = "modal" data-target = "#editModal" ng-click="editUser(u._id)" data-toggle="tooltip" title="Update"></button>
 					<button class="btn btn-danger glyphicon glyphicon-remove" ng-click="vm.deleteUser(u._id)" data-toggle="tooltip" title="Delete"></button>
