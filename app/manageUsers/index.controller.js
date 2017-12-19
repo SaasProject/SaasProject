@@ -51,7 +51,6 @@
             role: '',
             firstName: '',
             lastName: '',
-            username: '',
             email: '',
             password:''
         };
@@ -146,7 +145,7 @@
         }
 
         $scope.editUser = function(index){
-            $scope.aUsers = filterIndexById($scope.allUsers, index);
+            $scope.aUsers = angular.copy(filterIndexById($scope.allUsers, index));
         };
 		
 		vm.cancelEdit = function() {
@@ -154,7 +153,6 @@
             role: '',
             firstName: '',
             lastName: '',
-            username: '',
             email: ''
             };
 			
@@ -166,15 +164,14 @@
 			
 			 if($scope.aUsers.role.length===0 
                 || $scope.aUsers.firstName.length===0 
-                || $scope.aUsers.lastName.length===0  
-                || $scope.aUsers.username.length===0  
+                || $scope.aUsers.lastName.length===0   
                 || $scope.aUsers.email.length===0 ){
 					FlashService.Error('Please Fill up all the textfields');
 				} else {
 			          console.log($scope.aUsers);
 					UserService.Update($scope.aUsers)
 						.then(function () {
-							$scope.aUsers = {role: '', firstName: '', lastName: '', username: '', email: ''};
+							$scope.aUsers = {role: '', firstName: '', lastName: '', email: ''};
 							FlashService.Success('User updated');
 							initController();
 					})
