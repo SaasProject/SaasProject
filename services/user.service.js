@@ -193,11 +193,16 @@ function update(_id, userParam) {
                 function (err, user) {
                     if (err) deferred.reject(err);
 
-                    if (user && bcrypt.compareSync(userParam.oldPassword, user.hash)){
-                        updateUser();
-                    }else{
-                        deferred.reject('Old password is incorrect');
-                    }
+					if(userParam.oldPassword){
+						if (user && bcrypt.compareSync(userParam.oldPassword, user.hash)){
+							updateUser();
+						}else{
+							deferred.reject('Old password is incorrect');
+						}
+					}
+					else{
+						updateUser();
+					}
                 });
     });
  
@@ -211,6 +216,7 @@ function update(_id, userParam) {
         };
  
         // update password if it was entered
+		console.log(userParam.oldPassword);
         if (userParam.password) {
             set.hash = bcrypt.hashSync(userParam.password, 10);
         }
