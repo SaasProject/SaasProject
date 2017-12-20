@@ -19,11 +19,11 @@
             return $http.get('/api/devices/all').then(handleSuccess, handleError);
         }
 
-        function addDevice(devices) {
+        function addDevice(device) {
             return $http.post('/api/devices/addDevice', device).then(handleSuccess, handleError);
         }
 
-        function updateDevice(devices){
+        function updateDevice(device){
             return $http.put('/api/devices/' + device._id, device).then(handleSuccess, handleError);
         }
         

@@ -31,7 +31,7 @@
     function Controller(DeviceService, $scope, FlashService) {
         var vm = this;
  
-        vm.device = [];
+		vm.device = [];
 
         // function to convert object to array
         Object.size = function(obj) {
@@ -46,7 +46,7 @@
         $scope.currentPage = 1;
         $scope.pageSize = 10;
         
-        // Scope for users data
+        // Scope for data
         $scope.aDevices = {
             deviceId: '',
             deviceName: '',
@@ -103,22 +103,22 @@
         function initController() {
             // get current user
             DeviceService.getAllDevices().then(function (device) {
-                vm.device = device;
+				vm.device = device;
                 $scope.allDevices = device;
                 $scope.deviceLength = Object.size(device);
             });
         }
 
-        // added adduser function
-        $scope.addUser = function(isValid){
+        // added add function
+        $scope.addDevice = function(){
 			if($scope.aDevices.deviceId.length===0 
-                || $scope.aDevices.deviceLength.length===0 
+                || $scope.aDevices.deviceName.length===0 
                 || $scope.aDevices.location.length===0){
                 FlashService.Error('Please Fill up all the textfields');
 				$scope.aDevices = {deviceId: '',deviceName: '',location: ''};
 
             }else{
-                DeviceService.Insert($scope.aDevices)
+                DeviceService.addDevice($scope.aDevices)
                     .then(function () {
 						initController();
 			            FlashService.Success('Device Added');
@@ -129,14 +129,7 @@
                 }
         };
 
-        $scope.clearField = function(){
-            $scope.aDevices = {
-                deviceId: '',
-                deviceName: '',
-                location: ''
-            };
-        }
-
+      
         //filter function for pagination indexes
         function filterIndexById(input, id) {
             var i=0, len=Object.size(input);
@@ -147,7 +140,7 @@
             }
         }
 
-        $scope.editUser = function(index){
+        $scope.editDevice = function(index){
             $scope.aDevices = angular.copy(filterIndexById($scope.allDevices, index));
         };
 		
@@ -158,17 +151,17 @@
 		}
 		
 		
-		vm.updateUser = function(isValid) {
-			
-			if($scope.aDevices.deviceId.length===0 
-                || $scope.aDevices.deviceName.length===0    
-                || $scope.aDevices.location.length===0 ){
-					
+		vm.updateDevice = function() {
+				console.log($scope.aDevices);	
+				if($scope.aDevices.deviceId.length===0 
+					|| $scope.aDevices.deviceName.length===0 
+					|| $scope.aDevices.location.length===0){
+             		
 					FlashService.Error('Please Fill up all the textfields');
 					$scope.aDevices = {deviceId: '',deviceName: '',location: ''};
 					
 				} else {
-					DeviceService.Update($scope.aDevices)
+					DeviceService.updateDevice($scope.aDevices)
 						.then(function () {
 							
 							$scope.aDevices = {deviceId: '',deviceName: '',location: ''};
@@ -183,7 +176,7 @@
         }		
 		
 		//deleteUser function
-		vm.deleteUser = function(index) {
+		vm.deleteDevice = function(index) {
 			
 			var toDel = filterIndexById($scope.allDevices, index);
 

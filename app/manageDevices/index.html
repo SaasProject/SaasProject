@@ -15,20 +15,15 @@
           <h4 class="modal-title">Add Device</h4>
         </div>
         <div class="modal-body">
-          <form name = "userAddForm" novalidate>
-		    <label for="firstName">First Name: </label>
-		    <input id="firstName" type="text" ng-model="aUsers.firstName" class="form-control"><br>
-		    <label for="lastName">Last Name: </label>
-		    <input id="lastName" type="text" ng-model="aUsers.lastName" class="form-control"><br>
-		    <label for="email">Email: </label>
-		    <input id="email" type="email" ng-model="aUsers.email" class="form-control"><br>
-		    <label for="role">Role </label>
-		    <select id="role" type="text" ng-model="aUsers.role" class="form-control">
-		    	<option value="Admin">Admin</option>
-		    	<option value="User">User</option>
-		    </select><br>
-
-			<button class="btn btn-primary" ng-click="addUser(userAddForm.$valid)" data-dismiss = "modal">Add User</button>
+           <form>
+		    <label for="id">ID: </label>
+		    <input id="id" type="text" ng-model="aDevices.deviceId" class="form-control" required><br>
+		    <label for="name">Name: </label>
+		    <input id="name" type="text" ng-model="aDevices.deviceName" class="form-control" required><br>
+		    <label for="loc">Location: </label>
+		    <input id="loc" type="text" ng-model="aDevices.location" class="form-control" required><br>
+		    
+			<button class="btn btn-primary" ng-click="addDevice()" data-dismiss = "modal">Add Device</button>
 			<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
           </form>
         </div>
@@ -38,7 +33,7 @@
   </div>
   
   
-    <!-- Modal for Edit User -->
+    <!-- Modal for Edit -->
   <div class="modal fade" id="editModal" role="dialog">
 		<div class="modal-dialog">
 		
@@ -47,37 +42,30 @@
 			
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Update User</h4>
+					<h4 class="modal-title">Update Device</h4>
 				</div>
         
 				<div class="modal-body">
-					<form name = "userEditForm" novalidate>
+					<form>
 					
 						<div class="form-group">
-							<label for="fname">Firstname</label>
-							<input type="text" class="form-control" id="fname" ng-model = "aUsers.firstName" >
+							<label for="id">ID</label>
+							<input type="id" class="form-control" id="fname" ng-model="aDevices.deviceId" required>
 						</div>
            
 						<div class="form-group">
-							<label for="lname">Lastname</label>
-							<input type="text" class="form-control" id="lname" ng-model = "aUsers.lastName">
+							<label for="name">Name</label>
+							<input type="text" class="form-control" id="name" ng-model="aDevices.deviceName" required>
 						</div>
 						
 												
 						<div class="form-group">
-							<label for="email">Email</label>
-							<input type="email" class="form-control" id="email" ng-model = "aUsers.email">
+							<label for="loc">Location</label>
+							<input type="text" class="form-control" id="loc" ng-model="aDevices.location" required>
 						</div>
 						
-						<div class="form-group">
-							<label for="role">Role</label>
-							<select id="role"  class="form-control" ng-model = "aUsers.role" required>
-								<option value="Admin">Admin</option>
-								<option value="User">User</option>
-							</select>
-						</div>
-						
-						<button class = "btn btn-primary" ng-click = "vm.updateUser(userEditForm.$valid)" data-dismiss = "modal">Save</button>
+											
+						<button class = "btn btn-primary" ng-click = "vm.updateDevice()" data-dismiss = "modal">Save</button>
 						<button class= "btn btn-danger" ng-click = "vm.cancelEdit()" data-dismiss="modal">Cancel</button>
 					</form>
 				</div>
@@ -90,7 +78,7 @@
 <div class="panel">
 	<div class="row">
 		<div class="col-sm-3">
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Create new devices</button>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Create new device</button>
 		</div>
 	</div>
 	<div class="row">
@@ -123,8 +111,8 @@
 				<td class="cutOverflow">{{u.deviceName}}</td>
 				<td class="cutOverflow">{{u.location}}</td>
 				<td>
-					<button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle = "modal" data-target = "#editModal" ng-click="editUser(u._id)" data-toggle="tooltip" title="Update"></button>
-					<button class="btn btn-danger glyphicon glyphicon-remove" ng-click="vm.deleteUser(u._id)" data-toggle="tooltip" title="Delete"></button>
+					<button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle = "modal" data-target = "#editModal" ng-click="editDevice(u._id)" data-toggle="tooltip" title="Update"></button>
+					<button class="btn btn-danger glyphicon glyphicon-remove" ng-click="vm.deleteDevice(u._id)" data-toggle="tooltip" title="Delete"></button>
 				</td>
 			</tr>
 		</tbody>
