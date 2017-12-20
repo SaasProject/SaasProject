@@ -12,7 +12,7 @@
             };
         });
  
-    function Controller($window, AssetService, FlashService, $scope, $interval, $filter) {
+    function Controller($window, AssetService, FlashService, $scope, $interval, $filter, DeviceService) {
  
         //initialization
         $scope.newAsset = {
@@ -22,7 +22,7 @@
             status: ''
         };
         $scope.assets = [];
-        $scope.warehouses = [];
+        $scope.devices = [];
         $scope.currentPage = 1;
         $scope.pageSize = 5;
         $scope.reverse = false;
@@ -107,6 +107,10 @@
                     //get the fields of assets. since it is assumed that schema is fixed, you can get fields on any object
                     //keys = fields
                     $scope.columns = Object.keys($scope.assets[0]);
+
+                    DeviceService.getAllDevices().then(function(devices){
+                        $scope.devices = devices;
+                    }).catch(function(err){});
                 }
                 else{
                     //perform notification here
@@ -124,6 +128,8 @@
 
         $scope.addOrUpdateAsset = function(){
             if($scope.type == "add"){
+                $scope.newAsset.warehouse = "Outside";
+                console.log($scope.newAsset);
                 AssetService.addAsset($scope.newAsset).then(function(){
                     //get all assets to refresh the table
                     FlashService.Success('Asset Added');

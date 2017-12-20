@@ -20,7 +20,11 @@
                     <label for="name">Name: </label>
                     <input id="name" type="text" ng-model="newAsset.name" class="form-control" required><br>
                     <label for="warehouse">Warehouse </label>
-                    <input id="warehouse" type="text" ng-model="newAsset.warehouse" class="form-control" required><br>
+                    <input id="warehouse" type="text" ng-if="type == 'add'" class="form-control" value="Outside" readonly><br>
+                    <select ng-model="newAsset.warehouse" ng-if="type =='edit'" class="form-control">
+                        <option value="Outside">Outside</option>
+                        <option ng-repeat="device in devices">{{device.location}}</option>
+                    </select>
                     <label for="status">status: </label>
                     <input id="status" type="text" ng-model="newAsset.status" class="form-control" required><br>
                     <button class="btn btn-primary" ng-click="addOrUpdateAsset()" data-dismiss="modal">{{type == 'add' ? 'Add' : 'Update'}}</button>
