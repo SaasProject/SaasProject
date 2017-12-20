@@ -25,6 +25,7 @@ app.use('/login', require('./controllers/login.controller'));
 app.use('/register', require('./controllers/register.controller'));
 app.use('/app', require('./controllers/app.controller'));
 app.use('/api/users', require('./controllers/api/users.controller'));
+app.use('/api/devices', require('./controllers/api/devices.controller'));
  
 //added by jeremy
 app.use('/api/assets', require('./controllers/api/assets.controller'));

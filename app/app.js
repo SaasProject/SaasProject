@@ -34,6 +34,15 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'manageUsers' }
             })
+
+            //Added by Glenn
+            .state('manageDevices', {
+                url: '/manageDevices',
+                templateUrl: 'manageDevices/index.html',
+                controller: 'ManageDevices.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'manageDevices' }
+            })
             
             //added by jeremy
             .state('asset', {

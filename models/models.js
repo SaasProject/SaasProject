@@ -9,4 +9,12 @@ var assetSchema = new mongoose.Schema({
     status: {type: String, required: true},
 });
 
+//schema if devices has no reference
+var deviceSchema = new mongoose.Schema({
+    deviceId: {type: String, required: true, index: {unique: true}},
+    deviceName: {type: String, required: true},
+    location: {type: String, required: true},
+});
+
 mongoose.model('Asset', assetSchema);
+mongoose.model('Device', deviceSchema);

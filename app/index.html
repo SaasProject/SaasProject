@@ -27,7 +27,8 @@
                         <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         <!--added by jeremy -->
                         <li ng-class="{active: activeTab === 'asset'}"><a ui-sref="asset"><span class="glyphicon glyphicon-list-alt"></span> Assets</a></li>  
-                        <li ng-class="{active: activeTab === 'manageUsers'}" ng-show="isAdmin"><a ui-sref="manageUsers"><span class="glyphicon glyphicon-tasks"></span> Manage Accounts</a></li>                          
+                        <li ng-class="{active: activeTab === 'manageUsers'}" ng-show="isAdmin"><a ui-sref="manageUsers"><span class="glyphicon glyphicon-tasks"></span> Manage Accounts</a></li>    
+                        <li ng-class="{active: activeTab === 'manageDevices'}" ng-show="isAdmin"><a ui-sref="manageDevices"><span class="glyphicon glyphicon-hdd"></span> Manage Devices</a></li>                       
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account"><span class="glyphicon glyphicon-user"></a></li>
@@ -71,6 +72,8 @@
 	
 	<!-- added by glenn -->
 	<script src="manageUsers/index.controller.js"></script>
+    <script src="manageDevices/index.controller.js"></script>
+    <script src="app-services/device.service.js"></script> 
 
     <!-- added by jeremy -->
     <script src="app-services/asset.service.js"></script>    
