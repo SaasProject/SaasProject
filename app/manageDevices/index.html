@@ -15,15 +15,15 @@
           <h4 class="modal-title">Add Device</h4>
         </div>
         <div class="modal-body">
-           <form>
-		    <label for="id">ID: </label>
-		    <input id="id" type="text" ng-model="aDevices.deviceId" class="form-control" required><br>
-		    <label for="name">Name: </label>
-		    <input id="name" type="text" ng-model="aDevices.deviceName" class="form-control" required><br>
-		    <label for="loc">Location: </label>
-		    <input id="loc" type="text" ng-model="aDevices.location" class="form-control" required><br>
-		    
-			<button class="btn btn-primary" ng-click="addDevice()" data-dismiss = "modal">Add Device</button>
+          <form name = "deviceAddForm" novalidate>
+		    <label for="deviceId">Device ID: </label>
+		    <input id="deviceId" type="text" ng-model="aDevices.deviceId" class="form-control"><br>
+		    <label for="deviceName">Device Name: </label>
+		    <input id="deviceName" type="text" ng-model="aDevices.deviceName" class="form-control"><br>
+		    <label for="location">Location </label>
+		    <input id="location" type="text" ng-model="aDevices.location" class="form-control"><br>
+
+			<button class="btn btn-primary" ng-click="addDevice(deviceAddForm.$valid)" data-dismiss = "modal">Add Device</button>
 			<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
           </form>
         </div>
@@ -33,7 +33,7 @@
   </div>
   
   
-    <!-- Modal for Edit -->
+    <!-- Modal for Edit Device -->
   <div class="modal fade" id="editModal" role="dialog">
 		<div class="modal-dialog">
 		
@@ -46,26 +46,24 @@
 				</div>
         
 				<div class="modal-body">
-					<form>
+					<form name = "deviceEditForm" novalidate>
 					
 						<div class="form-group">
-							<label for="id">ID</label>
-							<input type="id" class="form-control" id="fname" ng-model="aDevices.deviceId" required>
+							<label for="deviceId">Device ID</label>
+							<input type="text" class="form-control" id="deviceId" ng-model = "aDevices.deviceId" >
 						</div>
            
 						<div class="form-group">
-							<label for="name">Name</label>
-							<input type="text" class="form-control" id="name" ng-model="aDevices.deviceName" required>
+							<label for="deviceName">Device Name</label>
+							<input type="text" class="form-control" id="deviceName" ng-model = "aDevices.deviceName">
 						</div>
 						
-												
 						<div class="form-group">
-							<label for="loc">Location</label>
-							<input type="text" class="form-control" id="loc" ng-model="aDevices.location" required>
+							<label for="location">Warehouse Location</label>
+							<input type="text" class="form-control" id="location" ng-model = "aDevices.location">
 						</div>
 						
-											
-						<button class = "btn btn-primary" ng-click = "vm.updateDevice()" data-dismiss = "modal">Save</button>
+						<button class = "btn btn-primary" ng-click = "vm.updateDevice(deviceEditForm.$valid)" data-dismiss = "modal">Save</button>
 						<button class= "btn btn-danger" ng-click = "vm.cancelEdit()" data-dismiss="modal">Cancel</button>
 					</form>
 				</div>
@@ -78,7 +76,7 @@
 <div class="panel">
 	<div class="row">
 		<div class="col-sm-3">
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Create new device</button>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Create new devices</button>
 		</div>
 	</div>
 	<div class="row">

@@ -110,7 +110,7 @@
         }
 
         // added add function
-        $scope.addDevice = function(){
+        $scope.addDevice = function(isValid){
 			if($scope.aDevices.deviceId.length===0 
                 || $scope.aDevices.deviceName.length===0 
                 || $scope.aDevices.location.length===0){
@@ -122,6 +122,7 @@
                     .then(function () {
 						initController();
 			            FlashService.Success('Device Added');
+                        $scope.aDevices = {deviceId: '',deviceName: '',location: ''};
                     })
                     .catch(function (error) {
                         FlashService.Error(error);
@@ -151,8 +152,7 @@
 		}
 		
 		
-		vm.updateDevice = function() {
-				console.log($scope.aDevices);	
+		vm.updateDevice = function(isValid) {
 				if($scope.aDevices.deviceId.length===0 
 					|| $scope.aDevices.deviceName.length===0 
 					|| $scope.aDevices.location.length===0){
