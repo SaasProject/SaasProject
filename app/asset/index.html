@@ -23,7 +23,7 @@
                     <input id="warehouse" type="text" ng-if="type == 'add'" class="form-control" value="Outside" readonly><br>
                     <select ng-model="newAsset.warehouse" ng-if="type =='edit'" class="form-control">
                         <option value="Outside">Outside</option>
-                        <option ng-repeat="device in devices">{{device.location}}</option>
+                        <option ng-repeat="warehouse in warehouses">{{warehouse}}</option>
                     </select>
                     <label for="status">status: </label>
                     <input id="status" type="text" ng-model="newAsset.status" class="form-control" required><br>

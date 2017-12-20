@@ -22,7 +22,7 @@
             status: ''
         };
         $scope.assets = [];
-        $scope.devices = [];
+        $scope.warehouses = [];
         $scope.currentPage = 1;
         $scope.pageSize = 5;
         $scope.reverse = false;
@@ -109,7 +109,12 @@
                     $scope.columns = Object.keys($scope.assets[0]);
 
                     DeviceService.getAllDevices().then(function(devices){
-                        $scope.devices = devices;
+                        angular.forEach(devices, function(value, key){
+                            console.log(value.location);
+                            if($scope.warehouses.indexOf(value.location) == -1){
+                                $scope.warehouses.push(value.location);
+                            }
+                        });
                     }).catch(function(err){});
                 }
                 else{
