@@ -138,8 +138,6 @@
 
         $scope.addOrUpdateAsset = function(){
             if($scope.type == "add"){
-                $scope.newAsset.warehouse = "Outside";
-                console.log($scope.newAsset);
                 AssetService.addAsset($scope.newAsset).then(function(){
                     //get all assets to refresh the table
                     FlashService.Success('Asset Added');

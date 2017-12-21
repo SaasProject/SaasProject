@@ -20,8 +20,7 @@
                     <label for="name">Name: </label>
                     <input id="name" type="text" ng-model="newAsset.name" class="form-control" required><br>
                     <label for="warehouse">Warehouse </label>
-                    <input id="warehouse" type="text" ng-if="type == 'add'" class="form-control" value="Outside" readonly><br>
-                    <select ng-model="newAsset.warehouse" ng-if="type =='edit'" class="form-control">
+                    <select ng-model="newAsset.warehouse" class="form-control">
                         <option value="Outside">Outside</option>
                         <option ng-repeat="warehouse in warehouses">{{warehouse}}</option>
                     </select>
