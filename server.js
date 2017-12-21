@@ -34,6 +34,21 @@ app.use('/api/devices', require('./controllers/api/devices.controller'));
 //added by jeremy
 app.use('/api/assets', require('./controllers/api/assets.controller'));
 
+//added by dyan0
+io.on('connection', function(socket){
+    
+    //for asset changes in realtime
+    socket.on('assetChange', function(){
+        console.log('debug2');
+        io.emit('assetChange');
+    });
+
+    console.log('a user is connected');
+    socket.on('disconnect', function(){
+        console.log('a user has disconnected');
+    })
+});
+
 // make '/app' default route
 app.get('/', function (req, res) {
     return res.redirect('/app');

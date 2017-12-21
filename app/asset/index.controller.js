@@ -12,7 +12,7 @@
             };
         });
  
-    function Controller($window, AssetService, FlashService, $scope, $interval, $filter, DeviceService) {
+    function Controller($window, AssetService, FlashService, $scope, $interval, $filter, DeviceService, socket) {
  
         //initialization
         $scope.newAsset = {
@@ -108,6 +108,11 @@
                     //keys = fields
                     $scope.columns = Object.keys($scope.assets[0]);
 
+                    // get realtime changes
+                    socket.on('assetChange', function(){
+                        getAllAssets();
+                    });
+
                     DeviceService.getAllDevices().then(function(devices){
                         angular.forEach(devices, function(value, key){
                             console.log(value.location);
@@ -138,6 +143,7 @@
                 AssetService.addAsset($scope.newAsset).then(function(){
                     //get all assets to refresh the table
                     FlashService.Success('Asset Added');
+                    socket.emit('assetChange');
                 })
                 .catch(function(error){
                     errorFunction(error);
@@ -146,6 +152,7 @@
             else{
                 AssetService.updateAsset($scope.newAsset).then(function(){
                     FlashService.Success('Asset Updated');
+                    socket.emit('assetChange');
                 })
                 .catch(function(error){
                     errorFunction(error);
@@ -181,7 +188,8 @@
         
             if (confirm("Are you sure to delete this user?")){
 				AssetService.Delete(toDel._id).then(function () {
-					FlashService.Success('Asset Deleted');
+                    FlashService.Success('Asset Deleted');
+                    socket.emit('assetChange');
 					getAllAssets();
                 })
                 .catch(function(error){

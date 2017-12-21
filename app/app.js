@@ -2,7 +2,7 @@
     'use strict';
  
     angular
-        .module('app', ['ui.router', 'ngSanitize', 'ngCsv', 'ui.bootstrap'])
+        .module('app', ['ui.router', 'ngSanitize', 'ngCsv', 'ui.bootstrap', 'btford.socket-io'])
         .config(config)
         .run(run);
  
