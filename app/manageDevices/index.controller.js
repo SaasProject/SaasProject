@@ -97,6 +97,11 @@
                 default: return '';
             }
         };
+
+        //Clear $scope.aDevice variable
+        function resetADevices() {
+            $scope.aDevices = {deviceId: '',deviceName: '',location: ''};
+        }
  
         initController();
  
@@ -115,18 +120,18 @@
                 || $scope.aDevices.deviceName.length===0 
                 || $scope.aDevices.location.length===0){
                 FlashService.Error('Please Fill up all the textfields');
-				$scope.aDevices = {deviceId: '',deviceName: '',location: ''};
+				resetADevices();
 
             }else{
                 DeviceService.addDevice($scope.aDevices)
                     .then(function () {
 						initController();
 			            FlashService.Success('Device Added');
-                        $scope.aDevices = {deviceId: '',deviceName: '',location: ''};
                     })
                     .catch(function (error) {
-                        FlashService.Error(error);
+                        errorFunction(error);
                     });
+                    resetADevices();
                 }
         };
 
@@ -158,7 +163,7 @@
 					|| $scope.aDevices.location.length===0){
              		
 					FlashService.Error('Please Fill up all the textfields');
-					$scope.aDevices = {deviceId: '',deviceName: '',location: ''};
+					resetADevices();
 					
 				} else {
 					DeviceService.updateDevice($scope.aDevices)
@@ -170,8 +175,9 @@
 					})
 					
 					.catch(function (error) {
-						FlashService.Error(error);
+						errorFunction(error);
 					});
+                    resetADevices();
 				}
         }		
 		
@@ -190,8 +196,20 @@
 					 
                 })
                 .catch(function (error) {
-                    FlashService.Error(error);
+                    errorFunction(error);
                 });
+            }
+        }
+
+        function errorFunction(error){
+            if(error.code == 11000){
+                FlashService.Error('Device already exists');
+            }
+            else if(error.name == 'ValidationError'){
+                FlashService.Error(error.message);
+            }
+            else{
+                FlashService.Error(error);
             }
         }
     }

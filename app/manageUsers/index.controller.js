@@ -100,6 +100,11 @@
                 default: return '';
             }
         };
+
+        //Clear $scope.aUsers
+        function resetAUsers () {
+            $scope.aUsers = {role: '',firstName: '',lastName: '',email: ''};
+        }
  
         initController();
  
@@ -115,16 +120,14 @@
         // added adduser function
         $scope.addUser = function(isValid){
 			if(!isValid) {
-				
 				FlashService.Error('Please input a valid email');
-				$scope.aUsers = {role: '',firstName: '',lastName: '',email: ''};
-				
+                resetAUsers();
 			} else if($scope.aUsers.role.length===0 
                 || $scope.aUsers.firstName.length===0 
                 || $scope.aUsers.lastName.length===0   
                 || $scope.aUsers.email.length===0 ){
                 FlashService.Error('Please Fill up all the textfields');
-				$scope.aUsers = {role: '',firstName: '',lastName: '',email: ''};
+				resetAUsers();
 
             }else{
                 var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -141,17 +144,12 @@
                     .catch(function (error) {
                         FlashService.Error(error);
                     });
+                    resetAUsers();
                 }
         };
 
         $scope.clearField = function(){
-            $scope.aUsers = {
-            role: '',
-            firstName: '',
-            lastName: '',
-            username: '',
-            email: ''
-            };
+            resetAUsers();
         }
 
         //filter function for pagination indexes
@@ -180,7 +178,7 @@
 			if (!isValid) {
 				
 				FlashService.Error('Please input a valid email');
-				$scope.aUsers = {role: '',firstName: '',lastName: '',email: ''};
+				resetAUsers();
 				
 			} else if($scope.aUsers.role.length===0 
                 || $scope.aUsers.firstName.length===0 
@@ -188,14 +186,11 @@
                 || $scope.aUsers.email.length===0 ){
 					
 					FlashService.Error('Please Fill up all the textfields');
-					$scope.aUsers = {role: '',firstName: '',lastName: '',email: ''};
+					resetAUsers();
 					
 				} else {
-			        console.log($scope.aUsers);
 					UserService.Update($scope.aUsers)
 						.then(function () {
-							
-							$scope.aUsers = {role: '', firstName: '', lastName: '', email: ''};
 							FlashService.Success('User updated');
 							initController();
 					})
@@ -203,6 +198,7 @@
 					.catch(function (error) {
 						FlashService.Error(error);
 					});
+                    resetAUsers();
 				}
         }		
 		

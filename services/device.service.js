@@ -34,11 +34,8 @@ function getAllDevices(){
 function addDevice(deviceParam){
     var deferred = Q.defer();
 
-    console.log(deviceParam);
-
     Device.create(deviceParam, function(err){
         if (err) deferred.reject(err);
-        console.log(err)
         deferred.resolve();
     });
         
