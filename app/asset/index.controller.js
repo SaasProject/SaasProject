@@ -15,12 +15,7 @@
     function Controller($window, AssetService, FlashService, $scope, $interval, $filter, DeviceService, socket) {
  
         //initialization
-        $scope.newAsset = {
-            tag: '',
-            name: '',
-            warehouse: '',
-            status: ''
-        };
+        $scope.newAsset = {};
         $scope.assets = [];
         $scope.warehouses = [];
         $scope.currentPage = 1;
@@ -97,6 +92,11 @@
             $scope.filtered_assets = $scope.$eval("assets | filter: search | orderBy: sortColumn : reverse");
         });
 
+        // get realtime changes
+        socket.on('assetChange', function(){
+            getAllAssets();
+        });
+
         function getAllAssets(){
             //get all assets
             AssetService.GetAll().then(function(assets){
@@ -107,11 +107,6 @@
                     //get the fields of assets. since it is assumed that schema is fixed, you can get fields on any object
                     //keys = fields
                     $scope.columns = Object.keys($scope.assets[0]);
-
-                    // get realtime changes
-                    socket.on('assetChange', function(){
-                        getAllAssets();
-                    });
 
                     DeviceService.getAllDevices().then(function(devices){
                         angular.forEach(devices, function(value, key){
@@ -156,8 +151,6 @@
                     errorFunction(error);
                 });
             }
-
-            getAllAssets();
         };
 
         $scope.editModal = function(asset){
@@ -169,12 +162,7 @@
 
         $scope.resetModal = function(){
             $scope.type = "add";
-            $scope.newAsset = {
-                tag: '',
-                name: '',
-                warehouse: '',
-                status: ''
-            };
+            $scope.newAsset = {};
         };
 		
 		
@@ -188,7 +176,6 @@
 				AssetService.Delete(toDel._id).then(function () {
                     FlashService.Success('Asset Deleted');
                     socket.emit('assetChange');
-					getAllAssets();
                 })
                 .catch(function(error){
                     errorFunction(error);
